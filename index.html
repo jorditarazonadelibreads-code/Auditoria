@@ -24,9 +24,9 @@
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;box-shadow:var(--shadow);margin-top:1.1rem;}
   .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
   .ff label{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-bottom:3px;text-transform:uppercase;}
-  .ff input,.ff select{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-family:inherit;}
+  .ff input,.ff select{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:inherit;}
 
-  .btn{width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;}
+  .btn{width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;}
   .btn-green{background:var(--accent);color:#fff;}
   .btn-excel{background:#217346;color:#fff;margin-top:10px;}
   .btn-back{background:var(--gray-l);color:var(--muted);border:1px solid var(--border);}
@@ -50,8 +50,7 @@
   .media-section{background:var(--gray-l);border-radius:8px;padding:10px;margin-top:10px;}
   .media-btns{display:flex;gap:6px;flex-wrap:wrap;}
   .mbtn{background:#fff;border:1.5px dashed var(--border);padding:8px;border-radius:6px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px;flex:1;justify-content:center;font-weight:600;}
-  .recording{background:var(--danger)!important;color:#fff!important;border-style:solid!important;animation:pulse 1s infinite;}
-  @keyframes pulse{0%{opacity:1}50%{opacity:.7}100%{opacity:1}}
+  .recording{background:var(--danger)!important;color:#fff!important;border-style:solid!important;}
 
   .foto-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
   .fthumb{position:relative;width:64px;height:64px;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
@@ -75,19 +74,9 @@
     <div class="card">
       <div class="fgrid">
         <div class="ff"><label>Fecha</label><input type="date" id="inp-fecha"/></div>
-        <div class="ff">
-          <label>Línea</label>
-          <select id="inp-linea">
-            <option>Línea 1</option><option>Línea 2</option><option>Línea 3</option><option>Línea 4</option>
-          </select>
-        </div>
+        <div class="ff"><label>Línea</label><select id="inp-linea"><option>Línea 1</option><option>Línea 2</option><option>Línea 3</option><option>Línea 4</option></select></div>
         <div class="ff"><label>Auditor</label><input type="text" id="inp-auditor" placeholder="Nombre..."/></div>
-        <div class="ff">
-          <label>Semana Mes</label>
-          <select id="inp-semana">
-            <option value="1">Semana 1</option><option value="2">Semana 2</option><option value="3">Semana 3</option><option value="4">Semana 4</option>
-          </select>
-        </div>
+        <div class="ff"><label>Semana Mes</label><select id="inp-semana"><option value="1">Semana 1</option><option value="2">Semana 2</option><option value="3">Semana 3</option><option value="4">Semana 4</option></select></div>
       </div>
       <button class="btn btn-green" style="margin-top:1.2rem" onclick="startAudit()">Comenzar Auditoría →</button>
     </div>
@@ -107,7 +96,7 @@
     <div class="card" style="text-align:center;">
       <p style="margin-bottom:15px; font-weight:600;">Auditoría Finalizada</p>
       <button class="btn btn-green" onclick="exportExcel()">⬇ DESCARGAR EXCEL FINAL</button>
-      <button class="btn btn-back" onclick="location.reload()" style="margin-top:10px; width:100%;">Nueva Auditoría</button>
+      <button class="btn btn-back" onclick="backToAudit()" style="margin-top:10px; width:100%;">← Revisar puntos</button>
     </div>
   </div>
 </div>
@@ -115,99 +104,92 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const PUNTOS = [
-  {id:1, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Falso rechazo: realizar muestreo durante 10 min.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
-  {id:2, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Verificación mancha azul/negra.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
-  {id:3, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Ausencia franjas crudas en montones de tortillas.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
-  {id:4, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Tipos KO: churro, doble, agujero, plegada, pequeña, harinosa, quemada.', frecuencia:'1 / turno', semanas:[1]},
-  {id:5, bloque:'Fabricar', funcion:'Incidencias', compromiso:'Seguimiento incidencia', como:'Preguntar a 3 JE sobre método actuación si hay 3 seguidas KO.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
-  {id:6, bloque:'Fabricar', funcion:'Incidencias', compromiso:'Seguimiento incidencia', como:'Provocar fallos detectados la semana anterior.', frecuencia:'1 / turno', semanas:[1,3]},
-  {id:7, bloque:'Fabricar', funcion:'Incidencias', compromiso:'Seguimiento incidencia', como:'Provocar los 3 principales inputs de calidad del último mes.', frecuencia:'1 / turno', semanas:[1]},
-  {id:8, bloque:'Fabricar', funcion:'Tolerancias', compromiso:'Parámetros', como:'Verificar parámetros introducidos en visor vs AO.', frecuencia:'1 / turno', semanas:[1]},
-  {id:9, bloque:'Equipos', funcion:'Formación', compromiso:'Capacitación JE', como:'JE saben interpretar pantallas y alarmas.', frecuencia:'1 / turno', semanas:[1,3]},
-  {id:10, bloque:'Equipos', funcion:'Formación', compromiso:'Capacitación JE', como:'Manuales actualizados y disponibles.', frecuencia:'1 / turno', semanas:[1]}
+  {id:1, bloque:'Fabricar', funcion:'Asegurar calidad de producto', compromiso:'Verificar si los visores de tortillas están funcionando correctamente, realizando pruebas periódicas y asegurando que el sistema detecte y rechace las piezas defectuosas.', como:'Falso rechazo: hacer un muestreo del rechazo, durante 10 minutos, para comprobar si las tortillas han sido correctamente expulsadas en una de las líneas. Comprobar que en la aplicación aparecen todos los defectos que esa tortilla tiene.', frecuencia:'Semanal', semanas:[1,2,3,4]},
+  {id:2, bloque:'Fabricar', funcion:'Asegurar calidad de producto', compromiso:'Verificar si los visores de tortillas están funcionando correctamente, realizando pruebas periódicas y asegurando que el sistema detecte y rechace las piezas defectuosas.', como:'Verificación de expulsión: coger, durante dos minutos, montones de tortillas que salen de la contadora y comprobar que no hay franjas crudas. Comprobar en una de las líneas.', frecuencia:'Semanal', semanas:[1,2,3,4]},
+  {id:3, bloque:'Fabricar', funcion:'Asegurar calidad de producto', compromiso:'Ajustar nivel de rechazo a nivel de tolerancias, calibrando los parámetros del sistema para garantizar que las tolerancias de aceptación y rechazo estén correctamente configuradas, reduciendo al mínimo los rechazos innecesarios sin comprometer la calidad del producto.', como:'Ir al visor y ver que las tolerancias son las definidas por AO en una de las líneas.', frecuencia:'Mensual', semanas:[1]},
+  {id:4, bloque:'Fabricar', funcion:'Asegurar calidad de producto', compromiso:'Asegurar que el sistema de visión identifique correctamente los defectos críticos como manchas, falta de translucidez o fallos de forma, minimizando el impacto en la línea de producción.', como:'Verificar mancha azul/negra.', frecuencia:'Semanal', semanas:[1,2,3,4]},
+  {id:5, bloque:'Fabricar', funcion:'Asegurar calidad de producto', compromiso:'Supervisar el correcto apilado de los productos finales para evitar fallos en el proceso de conteo y empaquetado, garantizando que el producto llegue al cliente final en condiciones óptimas.', como:'Ausencia franjas crudas en montones de tortillas.', frecuencia:'Semanal', semanas:[1,2,3,4]},
+  {id:6, bloque:'Fabricar', funcion:'Asegurar calidad de producto', compromiso:'Evaluar los fallos detectados por el sistema de visión y asegurar que el personal encargado sepa cómo actuar ante una incidencia repetitiva, mejorando la respuesta técnica ante desviaciones.', como:'Tipos KO: churro, doble, agujero, plegada, pequeña, harinosa, quemada.', frecuencia:'Semanal', semanas:[1]},
+  {id:7, bloque:'Fabricar', funcion:'Asegurar calidad de producto', compromiso:'Mantener una comunicación fluida entre los jefes de equipo y el personal de calidad ante desviaciones críticas detectadas por los visores, asegurando un flujo de información rápido y eficiente.', como:'Preguntar a 3 JE sobre método actuación si hay 3 seguidas KO.', frecuencia:'Semanal', semanas:[1,2,3,4]},
+  {id:8, bloque:'Fabricar', funcion:'Asegurar calidad de producto', compromiso:'Realizar seguimientos post-incidencia para comprobar si las medidas correctivas aplicadas han sido efectivas, reduciendo la tasa de fallos recurrentes.', como:'Provocar fallos detectados la semana anterior.', frecuencia:'Quincenal', semanas:[1,3]},
+  {id:9, bloque:'Fabricar', funcion:'Asegurar calidad de producto', compromiso:'Verificar que el personal de planta sepa interpretar las pantallas y alarmas del sistema Cortex, asegurando una monitorización constante del estado de los visores.', como:'JE saben interpretar pantallas y alarmas.', frecuencia:'Quincenal', semanas:[1,3]},
+  {id:10, bloque:'Fabricar', funcion:'Asegurar calidad de producto', compromiso:'Garantizar que toda la documentación técnica y manuales de usuario de los visores estén disponibles y actualizados para el personal operativo.', como:'Manuales actualizados y disponibles.', frecuencia:'Mensual', semanas:[1]}
 ];
 
-let results = {}, currentIdx = 0, puntosActivos = [], auditInfo = {}, recorder = null, audioChunks = [], recordingId = null;
+let results={}, currentIdx=0, puntosActivos=[], auditInfo={}, recorder=null, audioChunks=[], recordingId=null;
 
 function startAudit(){
-  const f = document.getElementById('inp-fecha').value;
-  const a = document.getElementById('inp-auditor').value;
-  const s = parseInt(document.getElementById('inp-semana').value);
-  if(!f || !a){ alert('Completa fecha y auditor.'); return; }
-  auditInfo = { fecha:f, linea:document.getElementById('inp-linea').value, auditor:a };
-  puntosActivos = PUNTOS.filter(p => p.semanas.includes(s));
+  const f=document.getElementById('inp-fecha').value, a=document.getElementById('inp-auditor').value, s=parseInt(document.getElementById('inp-semana').value);
+  if(!f || !a){alert('Completa fecha y auditor.'); return;}
+  auditInfo={fecha:f, linea:document.getElementById('inp-linea').value, auditor:a};
+  puntosActivos=PUNTOS.filter(p=>p.semanas.includes(s));
   document.getElementById('setup-panel').classList.add('hidden');
   document.getElementById('audit-panel').classList.remove('hidden');
   renderCurrent();
 }
 
 function renderCurrent(){
-  const p = puntosActivos[currentIdx];
-  const r = results[p.id] || { estado:'', obs:'', fotos:[], audios:[] };
-  const isRec = recordingId === p.id;
-  document.getElementById('puntos-container').innerHTML = `
+  const p=puntosActivos[currentIdx], r=results[p.id]||{estado:'',obs:'',fotos:[],audios:[]}, isRec=recordingId===p.id;
+  document.getElementById('puntos-container').innerHTML=`
     <div class="pc">
-      <div class="pc-hdr"><span>PUNTO ${currentIdx+1} / ${puntosActivos.length}</span><strong>${p.bloque}</strong></div>
+      <div class="pc-hdr"><span>PUNTO ${currentIdx+1}/${puntosActivos.length}</span><strong>${p.bloque}</strong></div>
       <div class="pc-body">
         <div class="pc-fn">${p.funcion}</div>
         <div class="pc-como"><strong>CÓMO VERIFICAR:</strong> ${p.como}</div>
         <div class="rrow">
           <button class="rbtn rbtn-ok ${r.estado==='OK'?'sel':''}" onclick="setEstado(${p.id},'OK')">CONFORME (OK)</button>
-          <button class="rbtn rbtn-ko ${r.estado==='KO'?'sel':''}" onclick="setEstado(${p.id},'KO')">NO CONFORME (KO)</button>
+          <button class="rbtn rbtn-ko ${r.estado==='KO'?'sel':''}" onclick="setEstado(${p.id},'KO')">INCIDENCIA (KO)</button>
         </div>
-        <textarea class="obs" placeholder="Observaciones..." onchange="saveObs(${p.id}, this.value)">${r.obs}</textarea>
+        <textarea class="obs" onchange="saveObs(${p.id},this.value)" placeholder="Observaciones...">${r.obs}</textarea>
         <div class="media-section">
           <div class="media-btns">
-            <label class="mbtn">📷 Cámara<input type="file" accept="image/*" capture="environment" hidden onchange="addFoto(${p.id}, this)"></label>
+            <label class="mbtn">📷 Foto<input type="file" accept="image/*" capture="environment" hidden onchange="addFoto(${p.id},this)"></label>
             <button class="mbtn ${isRec?'recording':''}" onclick="toggleAudio(${p.id})">${isRec?'⏹ PARAR':'🎙 AUDIO'} (${r.audios.length})</button>
           </div>
-          <div class="foto-grid">${r.fotos.map((f,i)=>`<div class="fthumb"><img src="${f}"><button class="fdel" onclick="delFoto(${p.id},${i})">✕</button></div>`).join('')}</div>
-          <div class="audio-list">${r.audios.map((a,i)=>`<div class="audio-item"><audio src="${a}" controls></audio><button class="fdel" style="position:static; width:30px; height:30px;" onclick="delAudio(${p.id},${i})">🗑</button></div>`).join('')}</div>
+          <div class="foto-grid">${r.fotos.map((f,i)=>`<div class="fthumb"><img src="${f.data}"><button class="fdel" onclick="delFoto(${p.id},${i})">✕</button></div>`).join('')}</div>
+          <div class="audio-list">${r.audios.map((a,i)=>`<div class="audio-item"><audio src="${a.data}" controls></audio><button class="fdel" style="position:static;width:25px;height:25px" onclick="delAudio(${p.id},${i})">🗑</button></div>`).join('')}</div>
         </div>
       </div>
     </div>`;
-  document.getElementById('prog-fill').style.width = ((currentIdx+1)/puntosActivos.length*100)+'%';
+  document.getElementById('prog-fill').style.width=((currentIdx+1)/puntosActivos.length*100)+'%';
 }
 
 function setEstado(id,v){ if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]}; results[id].estado=v; renderCurrent(); }
 function saveObs(id,v){ if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]}; results[id].obs=v; }
 function addFoto(id,input){
-  const reader = new FileReader();
-  reader.onload = (e) => { if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]}; results[id].fotos.push(e.target.result); renderCurrent(); };
+  const reader=new FileReader();
+  reader.onload=(e)=>{ if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]}; results[id].fotos.push({name:input.files[0].name, data:e.target.result}); renderCurrent(); };
   reader.readAsDataURL(input.files[0]);
 }
 function delFoto(id,i){ results[id].fotos.splice(i,1); renderCurrent(); }
 function delAudio(id,i){ results[id].audios.splice(i,1); renderCurrent(); }
 
 async function toggleAudio(id){
-  if(recordingId === id){ recorder.stop(); return; }
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  recorder = new MediaRecorder(stream);
-  audioChunks = [];
-  recordingId = id;
-  recorder.ondataavailable = e => audioChunks.push(e.data);
-  recorder.onstop = () => {
-    const reader = new FileReader();
-    reader.onload = (e) => { if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]}; results[id].audios.push(e.target.result); recordingId=null; renderCurrent(); };
+  if(recordingId===id){recorder.stop(); return;}
+  const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+  recorder=new MediaRecorder(stream); audioChunks=[]; recordingId=id;
+  recorder.ondataavailable=e=>audioChunks.push(e.data);
+  recorder.onstop=()=>{
+    const reader=new FileReader();
+    reader.onload=(e)=>{ if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]}; results[id].audios.push({name:`audio_${Date.now()}.webm`, data:e.target.result}); recordingId=null; renderCurrent(); };
     reader.readAsDataURL(new Blob(audioChunks));
-    stream.getTracks().forEach(t => t.stop());
+    stream.getTracks().forEach(t=>t.stop());
   };
-  recorder.start();
-  renderCurrent();
+  recorder.start(); renderCurrent();
 }
 
-function navigate(d){ let n=currentIdx+d; if(n>=0 && n<puntosActivos.length){currentIdx=n;renderCurrent();}else if(n>=puntosActivos.length){document.getElementById('audit-panel').classList.add('hidden');document.getElementById('summary-panel').classList.remove('hidden');} }
+function navigate(d){ let n=currentIdx+d; if(n>=0 && n<puntosActivos.length){currentIdx=n;renderCurrent();} else if(n>=puntosActivos.length){document.getElementById('audit-panel').classList.add('hidden');document.getElementById('summary-panel').classList.remove('hidden');} }
+function backToAudit(){ document.getElementById('summary-panel').classList.add('hidden'); document.getElementById('audit-panel').classList.remove('hidden'); }
+function getISOWeek(d){ const dt=new Date(d); dt.setHours(0,0,0,0); dt.setDate(dt.getDate()+4-(dt.getDay()||7)); return Math.ceil((((dt-new Date(dt.getFullYear(),0,1))/86400000)+1)/7); }
 
 function exportExcel(){
-  const rows = puntosActivos.map((p,i)=>({
-    'Fecha':auditInfo.fecha, 'Línea':auditInfo.linea, 'Auditor':auditInfo.auditor, 'Bloque':p.bloque, 'Función':p.funcion, 'Compromiso':p.compromiso, 'Cómo verificar':p.como, 'Frecuencia':p.frecuencia, 'Resultado':results[p.id]?.estado||'', 'Observaciones':results[p.id]?.obs||'', 'Evidencias':(results[p.id]?.fotos.length||0)+' fotos y '+(results[p.id]?.audios.length||0)+' audios'
+  const week=getISOWeek(auditInfo.fecha); const year=new Date(auditInfo.fecha).getFullYear();
+  const rows=puntosActivos.map((p,i)=>({
+    'Fecha':auditInfo.fecha, 'Línea':auditInfo.linea, 'Auditor':auditInfo.auditor, 'Semana año':`Semana ${week}/${year}`, 'Bloque':p.bloque, 'Función':p.funcion, 'Compromiso':p.compromiso, 'Cómo verificar':p.como, 'Frecuencia':p.frecuencia, 'Resultado':results[p.id]?.estado||'', 'Observaciones':results[p.id]?.obs||'', 'Fotos adjuntas':results[p.id]?.fotos.length||0, 'Audios adjuntos':results[p.id]?.audios.length||0, 'Plan de acción':''
   }));
-  const ws = XLSX.utils.json_to_sheet(rows);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Audit");
-  XLSX.writeFile(wb, `Audit_${auditInfo.linea}.xlsx`);
+  const ws=XLSX.utils.json_to_sheet(rows); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Audit"); XLSX.writeFile(wb, `Audit_${auditInfo.linea}.xlsx`);
 }
-document.getElementById('inp-fecha').value = new Date().toISOString().split('T')[0];
+document.getElementById('inp-fecha').value=new Date().toISOString().split('T')[0];
 </script>
 </body>
 </html>
