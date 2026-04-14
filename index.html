@@ -9,158 +9,67 @@
   :root{
     --bg:#f5f4f0;--surface:#fff;--border:#e0ddd6;--text:#1a1916;--muted:#6b6860;
     --accent:#1a5c3a;--accent-l:#e8f3ed;--danger:#b83232;--danger-l:#fdf0f0;
-    --warn:#8a6000;--warn-l:#fef9ec;--gray:#9a9790;--gray-l:#f0efe9;
-    --blue:#1e4d8c;--blue-l:#edf2fb;--r:10px;
-    --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);
+    --gray:#9a9790;--gray-l:#f0efe9;--r:10px;
+    --shadow:0 4px 12px rgba(0,0,0,.08);
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-  body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
-
-  .hdr{background:var(--accent);padding:.85rem 1.1rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;}
-  .hdr-logo{width:34px;height:34px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
-  .hdr h1{font-size:14px;font-weight:600;color:#fff;letter-spacing:-0.01em;}
-  .hdr p{font-size:11px;color:rgba(255,255,255,.65);margin-top:1px;}
-
-  .wrap{padding:1.1rem;max-width:680px;margin:0 auto;}
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;box-shadow:var(--shadow);margin-top:1.1rem;}
-  .card-title{font-size:14px;font-weight:600;margin-bottom:.85rem;display:flex;align-items:center;gap:6px;}
-
-  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
-  .ff label{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em;}
-  .ff input,.ff select{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:'IBM Plex Sans',sans-serif;-webkit-appearance:none;transition:border-color .2s;}
-  .ff input:focus{outline:none;border-color:var(--accent);}
-
-  .btn{width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;text-decoration:none;}
-  .btn-green{background:var(--accent);color:#fff;}
-  .btn-green:active{transform:scale(.98);opacity:.9;}
-  .btn-excel{background:#217346;color:#fff;margin-top:10px;}
-  .btn-back{background:var(--gray-l);color:var(--muted);border:1px solid var(--border);}
-
-  .prog-wrap{margin-bottom:1.1rem;}
-  .prog-top{display:flex;justify-content:space-between;margin-bottom:5px;align-items:baseline;}
-  .prog-top span{font-size:12px;color:var(--muted);}
-  .prog-top strong{font-size:12px;font-weight:600;font-family:'IBM Plex Mono';color:var(--accent);}
-  .prog-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden;}
-  .prog-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s cubic-bezier(0.4, 0, 0.2, 1);}
-
-  .pc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:.9rem;}
-  .pc-hdr{padding:.65rem .9rem;background:var(--gray-l);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px;}
-  .pc-num{font-family:'IBM Plex Mono';font-size:11px;color:var(--muted);font-weight:500;}
-  .tag{font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.02em;}
-  .tag-fab{background:var(--blue-l);color:var(--blue);}
-  .pc-body{padding:.9rem;}
-  .pc-fn{font-size:13px;font-weight:600;margin-bottom:5px;}
-  .pc-como{font-size:12px;color:var(--muted);line-height:1.6;padding:7px 9px;background:var(--gray-l);border-radius:6px;border-left:3px solid var(--border);margin-bottom:10px;}
-  
-  .rrow{display:flex;gap:5px;margin-bottom:9px;}
-  .rbtn{flex:1;padding:10px 4px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;font-size:12px;font-weight:500;background:var(--surface);color:var(--muted);transition:all .2s;}
+  body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);padding-bottom:100px;}
+  .hdr{background:var(--accent);padding:1rem;color:#fff;position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;}
+  .wrap{padding:1rem;max-width:600px;margin:0 auto;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;box-shadow:var(--shadow);margin-bottom:1rem;}
+  .ff label{display:block;font-size:11px;color:var(--muted);font-weight:600;margin-bottom:4px;text-transform:uppercase;}
+  .ff input, .ff select{width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;margin-bottom:10px;font-size:14px;}
+  .pc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:1rem;overflow:hidden;}
+  .pc-hdr{padding:8px 12px;background:var(--gray-l);font-size:12px;font-weight:600;display:flex;justify-content:space-between;}
+  .pc-body{padding:12px;}
+  .pc-como{font-size:13px;color:var(--muted);background:#f9f8f4;padding:10px;border-radius:6px;margin:10px 0;line-height:1.4;border-left:3px solid var(--accent);}
+  .rrow{display:flex;gap:8px;margin:10px 0;}
+  .rbtn{flex:1;padding:12px;border-radius:8px;border:1px solid var(--border);background:#fff;font-weight:600;cursor:pointer;}
   .rbtn-ok.sel{background:var(--accent-l);border-color:var(--accent);color:var(--accent);}
   .rbtn-ko.sel{background:var(--danger-l);border-color:var(--danger);color:var(--danger);}
-
-  .obs{width:100%;padding:8px 9px;font-size:12px;border:1px solid var(--border);border-radius:6px;min-height:54px;margin-bottom:8px;font-family:inherit;resize:none;}
-  .obs:focus{outline:none;border-color:var(--accent);}
-
-  .media-section{background:var(--gray-l);border-radius:8px;padding:9px;margin-bottom:4px;}
-  .media-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;margin-bottom:7px;display:block;}
-  .media-btns{display:flex;gap:6px;flex-wrap:wrap;}
-  .mbtn{display:inline-flex;align-items:center;gap:5px;padding:8px 12px;border-radius:7px;border:1.5px dashed var(--border);cursor:pointer;font-size:12px;font-weight:500;background:var(--surface);color:var(--text);transition:all .2s;}
-  .mbtn:active{background:var(--gray-l);}
-  .mbtn-rec.recording{background:var(--danger);color:#fff;border-style:solid;animation:pulse 1s infinite;}
-  @keyframes pulse{0%{opacity:1}50%{opacity:.7}100%{opacity:1}}
-
-  .foto-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;}
-  .fthumb{position:relative;width:64px;height:64px;border-radius:6px;overflow:hidden;border:1px solid var(--border);background:#eee;}
-  .fthumb img{width:100%;height:100%;object-fit:cover;}
-  .fdel{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;border:none;font-size:10px;display:flex;align-items:center;justify-content:center;}
-
-  .audio-list{margin-top:7px;display:flex;flex-direction:column;gap:5px;}
-  .audio-item{display:flex;align-items:center;gap:7px;background:var(--surface);border-radius:6px;padding:4px 8px;border:1px solid var(--border);}
-  .audio-item audio{flex:1;height:28px;}
-  .audio-del{background:none;border:none;color:var(--danger);font-size:14px;padding:4px;cursor:pointer;}
-
-  .quick-nav{display:flex;gap:8px;margin-top:1.2rem;position:sticky;bottom:1rem;z-index:10;}
-
-  .nav-row{display:flex;gap:8px;margin-top:.5rem;}
-  .nbtn{flex:1;padding:10px;border-radius:8px;border:1px solid var(--border);cursor:pointer;font-size:13px;font-weight:500;background:var(--surface);color:var(--text);}
-  .nbtn-primary{background:var(--accent);color:#fff;border-color:var(--accent);}
-
-  .hidden{display:none!important;}
-
-  @media print{
-    .hdr,.nav-row,.quick-nav,.media-section{display:none!important;}
-  }
+  textarea{width:100%;padding:10px;border-radius:6px;border:1px solid var(--border);font-family:inherit;font-size:13px;min-height:70px;}
+  .media-box{margin-top:12px;background:var(--gray-l);padding:10px;border-radius:8px;}
+  .m-btns{display:flex;gap:8px;}
+  .btn-m{flex:1;padding:8px;background:#fff;border:1px dashed var(--border);border-radius:6px;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;}
+  .btn-m.recording{background:var(--danger);color:#fff;animation:blink 1s infinite;}
+  @keyframes blink{50%{opacity:0.6}}
+  .f-grid{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+  .f-thumb{width:60px;height:60px;border-radius:4px;object-fit:cover;border:1px solid var(--border);}
+  .btn-main{width:100%;padding:15px;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:10px;}
+  .btn-go{background:var(--accent);color:#fff;}
+  .btn-xl{background:#217346;color:#fff;}
+  .hidden{display:none;}
+  .footer-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:15px;border-top:1px solid var(--border);display:flex;gap:10px;}
 </style>
 </head>
 <body>
 
-<div class="hdr">
-  <div class="hdr-logo">🔍</div>
-  <div>
-    <h1>Asistente de Auditoría</h1>
-    <p>Visores de tortillas — Delibreads</p>
-  </div>
-</div>
+<div class="hdr"><h1>Auditoría Visores</h1></div>
 
 <div class="wrap">
-  <div id="setup-panel">
+  <div id="setup">
     <div class="card">
-      <div class="card-title">Configuración de Auditoría</div>
-      <div class="fgrid">
-        <div class="ff"><label>Fecha</label><input type="date" id="inp-fecha"/></div>
-        <div class="ff">
-          <label>Línea</label>
-          <select id="inp-linea">
-            <option value="Línea 1">Línea 1</option>
-            <option value="Línea 2">Línea 2</option>
-            <option value="Línea 3">Línea 3</option>
-            <option value="Línea 4">Línea 4</option>
-          </select>
-        </div>
-        <div class="ff"><label>Auditor</label><input type="text" id="inp-auditor" placeholder="Nombre..."/></div>
-        <div class="ff">
-          <label>Semana Mes</label>
-          <select id="inp-semana">
-            <option value="1">Semana 1</option>
-            <option value="2">Semana 2</option>
-            <option value="3">Semana 3</option>
-            <option value="4">Semana 4</option>
-          </select>
-        </div>
-      </div>
-      <button class="btn btn-green" style="margin-top:1.1rem" onclick="startAudit()">Empezar Auditoría →</button>
+      <div class="ff"><label>Fecha</label><input type="date" id="i-fecha"></div>
+      <div class="ff"><label>Línea</label><select id="i-linea"><option>Línea 1</option><option>Línea 2</option><option>Línea 3</option></select></div>
+      <div class="ff"><label>Auditor</label><input type="text" id="i-auditor" placeholder="Nombre..."></div>
+      <div class="ff"><label>Semana</label><select id="i-semana"><option value="1">Semana 1</option><option value="2">Semana 2</option><option value="3">Semana 3</option><option value="4">Semana 4</option></select></div>
+      <button class="btn-main btn-go" onclick="start()">Comenzar Auditoría →</button>
     </div>
   </div>
 
-  <div id="audit-panel" class="hidden">
-    <div class="prog-wrap">
-      <div class="prog-top">
-        <span id="prog-label">0 de 0 puntos</span>
-        <strong id="prog-pct">0%</strong>
-      </div>
-      <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
-    </div>
-
-    <div id="puntos-container"></div>
-
-    <div class="nav-row">
-      <button class="nbtn" onclick="navigate(-1)">Anterior</button>
-      <button class="nbtn nbtn-primary" onclick="navigate(1)">Siguiente</button>
-    </div>
-
-    <div class="quick-nav">
-       <button class="btn btn-excel" onclick="exportExcel()" style="flex:2">📥 GUARDAR EXCEL</button>
-       <button class="btn btn-back" onclick="showSummary()" style="flex:1">Finalizar</button>
+  <div id="audit" class="hidden">
+    <div id="container"></div>
+    <div class="footer-nav">
+      <button class="btn-main" style="flex:1" onclick="nav(-1)">Anterior</button>
+      <button class="btn-main btn-go" style="flex:1" onclick="nav(1)">Siguiente</button>
     </div>
   </div>
 
-  <div id="summary-panel" class="hidden">
+  <div id="summary" class="hidden">
     <div class="card">
-      <div class="card-title">Resumen de Auditoría</div>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:1rem;">Has completado la evaluación. Puedes descargar el reporte ahora.</p>
-      
-      <button class="btn btn-green" onclick="exportExcel()">⬇ Descargar Excel (.xlsx)</button>
-      
-      <button class="btn btn-back" style="margin-top:8px" onclick="backToAudit()">← Editar puntos</button>
+      <h3>Auditoría Finalizada</h3>
+      <p style="margin:10px 0; font-size:14px; color:var(--muted);">Pulsa el botón para generar el informe y enviar los datos.</p>
+      <button class="btn-main btn-xl" onclick="exportReport()">📥 GENERAR EXCEL Y ENVIAR</button>
     </div>
   </div>
 </div>
@@ -168,239 +77,106 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const PUNTOS = [
-  {id:1, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Falso rechazo: realizar muestreo durante 10 min.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
-  {id:2, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Verificación mancha azul/negra.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
-  {id:3, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Ausencia franjas crudas en montones de tortillas.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
-  {id:4, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Tipos KO: churro, doble, agujero, plegada, pequeña, harinosa, quemada.', frecuencia:'1 / turno', semanas:[1]},
-  {id:5, bloque:'Fabricar', funcion:'Incidencias', compromiso:'Seguimiento incidencia', como:'Preguntar a 3 JE sobre método actuación si hay 3 seguidas KO.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
-  {id:6, bloque:'Fabricar', funcion:'Incidencias', compromiso:'Seguimiento incidencia', como:'Provocar fallos detectados la semana anterior.', frecuencia:'1 / turno', semanas:[1,3]},
-  {id:7, bloque:'Fabricar', funcion:'Incidencias', compromiso:'Seguimiento incidencia', como:'Provocar los 3 principales inputs de calidad del último mes.', frecuencia:'1 / turno', semanas:[1]},
-  {id:8, bloque:'Fabricar', funcion:'Tolerancias', compromiso:'Parámetros', como:'Verificar parámetros introducidos en visor vs AO.', frecuencia:'1 / turno', semanas:[1]},
-  {id:9, bloque:'Equipos', funcion:'Formación', compromiso:'Capacitación JE', como:'JE saben interpretar pantallas y alarmas.', frecuencia:'1 / turno', semanas:[1,3]},
-  {id:10, bloque:'Equipos', funcion:'Formación', compromiso:'Capacitación JE', como:'Manuales actualizados y disponibles.', frecuencia:'1 / turno', semanas:[1]}
+  {id:1, b:'Fabricar', f:'Calidad', c:'Falso rechazo: muestreo 10 min.', s:[1,2,3,4]},
+  {id:2, b:'Fabricar', f:'Calidad', c:'Verificación mancha azul/negra.', s:[1,2,3,4]},
+  {id:3, b:'Fabricar', f:'Calidad', c:'Ausencia franjas crudas.', s:[1,2,3,4]},
+  {id:4, b:'Fabricar', f:'Incidencias', c:'Preguntar a 3 JE sobre método.', s:[1,2,3,4]},
+  {id:5, b:'Equipos', f:'Formación', c:'JE interpretan pantallas.', s:[1,3]}
 ];
 
-let results = {};
-let currentIdx = 0;
-let puntosActivos = [];
-let auditInfo = {};
+let current = 0, activos = [], results = {}, info = {}, recorder = null, chunks = [];
 
-// Media handling
-let mediaRecorders = {};
-let recordingId = null;
-
-function startAudit(){
-  const f = document.getElementById('inp-fecha').value;
-  const l = document.getElementById('inp-linea').value;
-  const a = document.getElementById('inp-auditor').value;
-  const s = parseInt(document.getElementById('inp-semana').value);
-
-  if(!f || !a){ alert('Por favor, completa fecha y nombre del auditor.'); return; }
-
-  auditInfo = { fecha:f, linea:l, auditor:a, semanaMes:s };
-  puntosActivos = PUNTOS.filter(p => p.semanas.includes(s));
-  
-  document.getElementById('setup-panel').classList.add('hidden');
-  document.getElementById('audit-panel').classList.remove('hidden');
-  
-  renderCurrent();
+function start() {
+  info = { fecha: document.getElementById('i-fecha').value, linea: document.getElementById('i-linea').value, auditor: document.getElementById('i-auditor').value };
+  activos = PUNTOS.filter(p => p.s.includes(parseInt(document.getElementById('i-semana').value)));
+  document.getElementById('setup').classList.add('hidden');
+  document.getElementById('audit').classList.remove('hidden');
+  render();
 }
 
-function renderCurrent(){
-  const p = puntosActivos[currentIdx];
-  const res = results[p.id] || { estado:'', obs:'', fotos:[], audios:[] };
-  
-  const container = document.getElementById('puntos-container');
-  const isRecording = recordingId === p.id;
-
-  container.innerHTML = `
+function render() {
+  const p = activos[current];
+  const r = results[p.id] || { res: '', obs: '', fotos: [], audios: 0 };
+  document.getElementById('container').innerHTML = `
     <div class="pc">
-      <div class="pc-hdr">
-        <span class="pc-num">PUNTO ${currentIdx+1} / ${puntosActivos.length}</span>
-        <span class="tag tag-fab">${p.bloque}</span>
-      </div>
+      <div class="pc-hdr"><span>PUNTO ${current + 1}/${activos.length}</span><span>${p.b}</span></div>
       <div class="pc-body">
-        <div class="pc-fn">${p.funcion}</div>
-        <div class="pc-como"><strong>CÓMO VERIFICAR:</strong> ${p.como}</div>
-        
+        <div style="font-weight:600; font-size:14px;">${p.f}</div>
+        <div class="pc-como">${p.c}</div>
         <div class="rrow">
-          <button class="rbtn rbtn-ok ${res.estado==='OK'?'sel':''}" onclick="setEstado(${p.id},'OK')">CONFORME (OK)</button>
-          <button class="rbtn rbtn-ko ${res.estado==='KO'?'sel':''}" onclick="setEstado(${p.id},'KO')">NO CONFORME (KO)</button>
+          <button class="rbtn rbtn-ok ${r.res==='OK'?'sel':''}" onclick="saveRes(${p.id},'OK')">CONFORME</button>
+          <button class="rbtn rbtn-ko ${r.res==='KO'?'sel':''}" onclick="saveRes(${p.id},'KO')">NO CONFORME</button>
         </div>
-
-        <textarea class="obs" placeholder="Observaciones y notas..." onchange="saveObs(${p.id}, this.value)">${res.obs}</textarea>
-
-        <div class="media-section">
-          <span class="media-title">Evidencias (Fotos y Audios)</span>
-          <div class="media-btns">
-            <label class="mbtn">
-              📷 Cámara
-              <input type="file" accept="image/*" capture="environment" style="display:none" onchange="handleFile(${p.id}, this, 'foto')">
-            </label>
-            <label class="mbtn">
-              🖼 Galería
-              <input type="file" accept="image/*" multiple style="display:none" onchange="handleFile(${p.id}, this, 'foto')">
-            </label>
-            <button class="mbtn mbtn-rec ${isRecording?'recording':''}" onclick="toggleAudio(${p.id})">
-              ${isRecording ? '⏹ Parar' : '🎙 Grabar Audio'}
-            </button>
+        <textarea placeholder="Notas y plan de acción..." onchange="saveObs(${p.id},this.value)">${r.obs}</textarea>
+        <div class="media-box">
+          <div class="m-btns">
+            <label class="btn-m">📷 Foto<input type="file" accept="image/*" capture="environment" hidden onchange="addImg(${p.id},this)"></label>
+            <button id="rec-${p.id}" class="btn-m" onclick="toggleRec(${p.id})">🎙️ Audio (${r.audios})</button>
           </div>
-
-          <div class="foto-grid" id="fotos-${p.id}">
-            ${res.fotos.map((f, i) => `
-              <div class="fthumb">
-                <img src="${f.data}" onclick="window.open('${f.data}')">
-                <button class="fdel" onclick="removeMedia(${p.id}, ${i}, 'fotos')">✕</button>
-              </div>
-            `).join('')}
-          </div>
-
-          <div class="audio-list" id="audios-${p.id}">
-            ${res.audios.map((a, i) => `
-              <div class="audio-item">
-                <audio controls src="${a.data}"></audio>
-                <button class="audio-del" onclick="removeMedia(${p.id}, ${i}, 'audios')">🗑</button>
-              </div>
-            `).join('')}
-          </div>
+          <div class="f-grid" id="f-${p.id}">${r.fotos.map(f => `<img src="${f}" class="f-thumb">`).join('')}</div>
         </div>
       </div>
-    </div>
-  `;
-  updateProgress();
+    </div>`;
 }
 
-function setEstado(id, val){
-  if(!results[id]) results[id] = { estado:'', obs:'', fotos:[], audios:[] };
-  results[id].estado = val;
-  renderCurrent();
-}
-
-function saveObs(id, val){
-  if(!results[id]) results[id] = { estado:'', obs:'', fotos:[], audios:[] };
-  results[id].obs = val;
-}
-
-function handleFile(id, input, type){
-  if(!results[id]) results[id] = { estado:'', obs:'', fotos:[], audios:[] };
-  const files = Array.from(input.files);
-  files.forEach(file => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      results[id].fotos.push({ name: file.name, data: e.target.result });
-      renderCurrent();
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-async function toggleAudio(id){
-  if(recordingId === id){
-    mediaRecorders[id].stop();
-    return;
-  }
-  
-  if(!navigator.mediaDevices) { alert("Tu navegador no soporta grabación de audio."); return; }
-  
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  const mr = new MediaRecorder(stream);
-  mediaRecorders[id] = mr;
-  recordingId = id;
-  
-  const chunks = [];
-  mr.ondataavailable = e => chunks.push(e.data);
-  mr.onstop = () => {
-    const blob = new Blob(chunks, { type: 'audio/webm' });
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      if(!results[id]) results[id] = { estado:'', obs:'', fotos:[], audios:[] };
-      results[id].audios.push({ name: `audio_${Date.now()}.webm`, data: e.target.result });
-      recordingId = null;
-      renderCurrent();
-    };
-    reader.readAsDataURL(blob);
-    stream.getTracks().forEach(t => t.stop());
+function saveRes(id, v) { if(!results[id]) results[id]={res:'',obs:'',fotos:[],audios:0}; results[id].res=v; render(); }
+function saveObs(id, v) { if(!results[id]) results[id]={res:'',obs:'',fotos:[],audios:0}; results[id].obs=v; }
+function addImg(id, input) {
+  const file = input.files[0];
+  const reader = new FileReader();
+  reader.onload = (e) => { 
+    if(!results[id]) results[id]={res:'',obs:'',fotos:[],audios:0};
+    results[id].fotos.push(e.target.result); 
+    render(); 
   };
-  mr.start();
-  renderCurrent();
+  reader.readAsDataURL(file);
 }
 
-function removeMedia(id, index, type){
-  results[id][type].splice(index, 1);
-  renderCurrent();
-}
-
-function navigate(dir){
-  const newIdx = currentIdx + dir;
-  if(newIdx >= 0 && newIdx < puntosActivos.length){
-    currentIdx = newIdx;
-    renderCurrent();
-  } else if(newIdx === puntosActivos.length){
-    showSummary();
+async function toggleRec(id) {
+  const btn = document.getElementById(`rec-${id}`);
+  if (recorder && recorder.state === "recording") {
+    recorder.stop();
+    btn.classList.remove('recording');
+  } else {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    recorder = new MediaRecorder(stream);
+    chunks = [];
+    recorder.ondataavailable = e => chunks.push(e.data);
+    recorder.onstop = () => {
+      if(!results[id]) results[id]={res:'',obs:'',fotos:[],audios:0};
+      results[id].audios++;
+      render();
+    };
+    recorder.start();
+    btn.classList.add('recording');
   }
 }
 
-function updateProgress(){
-  const completed = puntosActivos.filter(p => results[p.id]?.estado).length;
-  const pct = Math.round((completed / puntosActivos.length) * 100);
-  document.getElementById('prog-label').innerText = `${completed} de ${puntosActivos.length} puntos`;
-  document.getElementById('prog-pct').innerText = `${pct}%`;
-  document.getElementById('prog-fill').style.width = `${pct}%`;
+function nav(d) {
+  current += d;
+  if (current < 0) current = 0;
+  if (current >= activos.length) {
+    document.getElementById('audit').classList.add('hidden');
+    document.getElementById('summary').classList.remove('hidden');
+  } else { render(); }
 }
 
-function showSummary(){
-  document.getElementById('audit-panel').classList.add('hidden');
-  document.getElementById('summary-panel').classList.remove('hidden');
-}
-
-function backToAudit(){
-  document.getElementById('summary-panel').classList.add('hidden');
-  document.getElementById('audit-panel').classList.remove('hidden');
-}
-
-function getISOWeek(d) {
-  d = new Date(Date.UTC(new Date(d).getFullYear(), new Date(d).getMonth(), new Date(d).getDate()));
-  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
-  var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-  var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
-  return weekNo;
-}
-
-function exportExcel(){
-  const week = getISOWeek(auditInfo.fecha);
-  const year = new Date(auditInfo.fecha).getFullYear();
-  const completed = puntosActivos.filter(p => ['OK','KO'].includes(results[p.id]?.estado));
+function exportReport() {
+  const rows = activos.map((p, i) => ({
+    'Fecha': info.fecha, 'Línea': info.linea, 'Auditor': info.auditor, 'Bloque': p.b, 'Resultado': results[p.id]?.res || 'Pte', 'Observaciones': results[p.id]?.obs || '', 'Evidencias': `${results[p.id]?.fotos.length || 0} fotos y ${results[p.id]?.audios || 0} audios`
+  }));
   
-  if(!completed.length){ alert('No hay puntos completados todavía.'); return; }
-
-  const rows = completed.map((p, i) => {
-    const r = results[p.id] || {};
-    return {
-      'Fecha': auditInfo.fecha,
-      'Línea': auditInfo.linea,
-      'Auditor': auditInfo.auditor,
-      'Semana año': `Semana ${week}/${year}`,
-      'Nº': i + 1,
-      'Bloque': p.bloque,
-      'Función': p.funcion,
-      'Compromiso': p.compromiso,
-      'Cómo verificar': p.como,
-      'Frecuencia': p.frecuencia,
-      'Resultado': r.estado || '',
-      'Observaciones': r.obs || '',
-      'Fotos adjuntas': r.fotos?.length ? r.fotos.map(f => f.name).join(', ') : '',
-      'Audios adjuntos': r.audios?.length ? r.audios.map(a => a.name).join(', ') : '',
-      'Plan de acción': ''
-    };
-  });
-
   const ws = XLSX.utils.json_to_sheet(rows);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Auditoria");
-  XLSX.writeFile(wb, `Auditoria_Visores_${auditInfo.linea}_${auditInfo.fecha}.xlsx`);
+  XLSX.writeFile(wb, `Informe_${info.linea}_${info.fecha}.xlsx`);
+
+  // ENVIAR POR CORREO (Abre la app de correo con el resumen)
+  const body = `Resumen Auditoría\nLínea: ${info.linea}\nFecha: ${info.fecha}\nAuditor: ${info.auditor}\n\nRevisar el Excel descargado y las fotos de la galería.`;
+  window.location.href = `mailto:?subject=Auditoria ${info.linea}&body=${encodeURIComponent(body)}`;
 }
 
-document.getElementById('inp-fecha').value = new Date().toISOString().split('T')[0];
+document.getElementById('i-fecha').value = new Date().toISOString().split('T')[0];
 </script>
 </body>
 </html>
