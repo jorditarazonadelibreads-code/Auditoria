@@ -23,10 +23,10 @@
   .wrap{padding:1.1rem;max-width:680px;margin:0 auto;}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;box-shadow:var(--shadow);margin-top:1.1rem;}
   .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
-  .ff label{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-bottom:3px;text-transform:uppercase;}
-  .ff input,.ff select{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:inherit;}
+  .ff label{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em;}
+  .ff input,.ff select{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:'IBM Plex Sans',sans-serif;}
 
-  .btn{width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;}
+  .btn{width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;}
   .btn-green{background:var(--accent);color:#fff;}
   .btn-excel{background:#217346;color:#fff;margin-top:10px;}
   .btn-back{background:var(--gray-l);color:var(--muted);border:1px solid var(--border);}
@@ -35,48 +35,65 @@
   .prog-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s;}
 
   .pc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:.9rem;}
-  .pc-hdr{padding:.65rem .9rem;background:var(--gray-l);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;}
+  .pc-hdr{padding:.65rem .9rem;background:var(--gray-l);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+  .pc-num{font-family:'IBM Plex Mono';font-size:11px;color:var(--muted);font-weight:500;}
+  .tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;text-transform:uppercase;background:var(--blue-l);color:var(--blue);}
+  
   .pc-body{padding:.9rem;}
   .pc-fn{font-size:13px;font-weight:600;margin-bottom:5px;}
-  .pc-como{font-size:12px;color:var(--muted);background:var(--gray-l);padding:8px;border-radius:6px;margin-bottom:10px;line-height:1.4;border-left:3px solid var(--accent);}
+  .pc-como{font-size:12px;color:var(--muted);line-height:1.6;padding:9px;background:var(--gray-l);border-radius:6px;border-left:3px solid var(--accent);margin-bottom:12px;}
   
-  .rrow{display:flex;gap:5px;margin-bottom:9px;}
-  .rbtn{flex:1;padding:10px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;font-weight:600;font-size:12px;color:var(--muted);}
+  .rrow{display:flex;gap:6px;margin-bottom:10px;}
+  .rbtn{flex:1;padding:11px 4px;border-radius:8px;border:1.5px solid var(--border);cursor:pointer;font-size:12px;font-weight:600;background:var(--surface);color:var(--muted);transition:all .2s;}
   .rbtn-ok.sel{background:var(--accent-l);border-color:var(--accent);color:var(--accent);}
   .rbtn-ko.sel{background:var(--danger-l);border-color:var(--danger);color:var(--danger);}
 
-  .obs{width:100%;padding:8px;font-size:12px;border:1px solid var(--border);border-radius:6px;min-height:60px;margin-bottom:8px;font-family:inherit;resize:none;}
+  .obs{width:100%;padding:10px;font-size:12px;border:1px solid var(--border);border-radius:8px;min-height:64px;margin-bottom:10px;font-family:inherit;resize:none;}
 
-  .media-section{background:var(--gray-l);border-radius:8px;padding:10px;margin-top:10px;}
-  .media-btns{display:flex;gap:6px;flex-wrap:wrap;}
-  .mbtn{background:#fff;border:1.5px dashed var(--border);padding:8px;border-radius:6px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px;flex:1;justify-content:center;font-weight:600;}
-  .recording{background:var(--danger)!important;color:#fff!important;border-style:solid!important;}
+  .media-section{background:var(--gray-l);border-radius:8px;padding:12px;margin-top:4px;}
+  .media-btns{display:flex;gap:8px;}
+  .mbtn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px;border-radius:8px;border:1.5px dashed var(--border);cursor:pointer;font-size:12px;font-weight:600;background:var(--surface);color:var(--text);}
+  .mbtn-rec.recording{background:var(--danger);color:#fff;border-style:solid;animation:pulse 1.2s infinite;}
+  @keyframes pulse{0%{opacity:1}50%{opacity:.7}100%{opacity:1}}
 
-  .foto-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
-  .fthumb{position:relative;width:64px;height:64px;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+  .foto-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .fthumb{position:relative;width:68px;height:68px;border-radius:8px;overflow:hidden;border:1px solid var(--border);}
   .fthumb img{width:100%;height:100%;object-fit:cover;}
-  .fdel{position:absolute;top:0;right:0;background:rgba(0,0,0,0.6);color:#fff;border:none;width:20px;height:20px;font-size:10px;display:flex;align-items:center;justify-content:center;}
+  .fdel{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;border:none;font-size:10px;display:flex;align-items:center;justify-content:center;}
 
-  .audio-list{margin-top:8px;display:flex;flex-direction:column;gap:5px;}
-  .audio-item{display:flex;align-items:center;gap:6px;background:#fff;padding:6px;border-radius:6px;border:1px solid var(--border);}
-  .audio-item audio{flex:1;height:32px;}
+  .audio-list{margin-top:10px;display:flex;flex-direction:column;gap:6px;}
+  .audio-item{display:flex;align-items:center;gap:8px;background:var(--surface);border-radius:8px;padding:6px 10px;border:1px solid var(--border);}
+  .audio-item audio{flex:1;height:30px;}
 
-  .nav-row{display:flex;gap:8px;margin-top:10px;}
+  .nav-row{display:flex;gap:8px;margin-top:12px;}
   .hidden{display:none!important;}
 </style>
 </head>
 <body>
 
-<div class="hdr"><div class="hdr-logo">🔍</div><h1>Asistente de Auditoría - Delibreads</h1></div>
+<div class="hdr">
+  <div class="hdr-logo">🔍</div>
+  <h1>Asistente de Auditoría - Delibreads</h1>
+</div>
 
 <div class="wrap">
   <div id="setup-panel">
     <div class="card">
       <div class="fgrid">
         <div class="ff"><label>Fecha</label><input type="date" id="inp-fecha"/></div>
-        <div class="ff"><label>Línea</label><select id="inp-linea"><option>Línea 1</option><option>Línea 2</option><option>Línea 3</option><option>Línea 4</option></select></div>
+        <div class="ff">
+          <label>Línea</label>
+          <select id="inp-linea">
+            <option>Línea 1</option><option>Línea 2</option><option>Línea 3</option><option>Línea 4</option>
+          </select>
+        </div>
         <div class="ff"><label>Auditor</label><input type="text" id="inp-auditor" placeholder="Nombre..."/></div>
-        <div class="ff"><label>Semana Mes</label><select id="inp-semana"><option value="1">Semana 1</option><option value="2">Semana 2</option><option value="3">Semana 3</option><option value="4">Semana 4</option></select></div>
+        <div class="ff">
+          <label>Semana Mes</label>
+          <select id="inp-semana">
+            <option value="1">Semana 1</option><option value="2">Semana 2</option><option value="3">Semana 3</option><option value="4">Semana 4</option>
+          </select>
+        </div>
       </div>
       <button class="btn btn-green" style="margin-top:1.2rem" onclick="startAudit()">Comenzar Auditoría →</button>
     </div>
@@ -89,14 +106,14 @@
       <button class="btn btn-back" style="flex:1" onclick="navigate(-1)">Anterior</button>
       <button class="btn btn-green" style="flex:1" onclick="navigate(1)">Siguiente</button>
     </div>
-    <button class="btn btn-excel" style="margin-top:15px;" onclick="exportExcel()">📥 GUARDAR EXCEL</button>
+    <button class="btn btn-excel" onclick="exportExcel()">📥 GUARDAR EXCEL</button>
   </div>
 
   <div id="summary-panel" class="hidden">
-    <div class="card" style="text-align:center;">
-      <p style="margin-bottom:15px; font-weight:600;">Auditoría Finalizada</p>
-      <button class="btn btn-green" onclick="exportExcel()">⬇ DESCARGAR EXCEL FINAL</button>
-      <button class="btn btn-back" onclick="backToAudit()" style="margin-top:10px; width:100%;">← Revisar puntos</button>
+    <div class="card" style="text-align:center">
+      <p style="font-weight:600; margin-bottom:15px;">Auditoría completada</p>
+      <button class="btn btn-green" onclick="exportExcel()">⬇ Descargar Informe (.xlsx)</button>
+      <button class="btn btn-back" style="margin-top:10px" onclick="backToAudit()">← Revisar puntos</button>
     </div>
   </div>
 </div>
@@ -132,7 +149,7 @@ function renderCurrent(){
   const p=puntosActivos[currentIdx], r=results[p.id]||{estado:'',obs:'',fotos:[],audios:[]}, isRec=recordingId===p.id;
   document.getElementById('puntos-container').innerHTML=`
     <div class="pc">
-      <div class="pc-hdr"><span>PUNTO ${currentIdx+1}/${puntosActivos.length}</span><strong>${p.bloque}</strong></div>
+      <div class="pc-hdr"><span class="pc-num">PUNTO ${currentIdx+1} / ${puntosActivos.length}</span><span class="tag">${p.bloque}</span></div>
       <div class="pc-body">
         <div class="pc-fn">${p.funcion}</div>
         <div class="pc-como"><strong>CÓMO VERIFICAR:</strong> ${p.como}</div>
@@ -143,8 +160,8 @@ function renderCurrent(){
         <textarea class="obs" onchange="saveObs(${p.id},this.value)" placeholder="Observaciones...">${r.obs}</textarea>
         <div class="media-section">
           <div class="media-btns">
-            <label class="mbtn">📷 Foto<input type="file" accept="image/*" capture="environment" hidden onchange="addFoto(${p.id},this)"></label>
-            <button class="mbtn ${isRec?'recording':''}" onclick="toggleAudio(${p.id})">${isRec?'⏹ PARAR':'🎙 AUDIO'} (${r.audios.length})</button>
+            <label class="mbtn">📷 Cámara<input type="file" accept="image/*" capture="environment" hidden onchange="addFoto(${p.id},this)"></label>
+            <button class="mbtn mbtn-rec ${isRec?'recording':''}" onclick="toggleAudio(${p.id})">${isRec?'⏹ PARAR':'🎙 AUDIO'} (${r.audios.length})</button>
           </div>
           <div class="foto-grid">${r.fotos.map((f,i)=>`<div class="fthumb"><img src="${f.data}"><button class="fdel" onclick="delFoto(${p.id},${i})">✕</button></div>`).join('')}</div>
           <div class="audio-list">${r.audios.map((a,i)=>`<div class="audio-item"><audio src="${a.data}" controls></audio><button class="fdel" style="position:static;width:25px;height:25px" onclick="delAudio(${p.id},${i})">🗑</button></div>`).join('')}</div>
@@ -185,7 +202,7 @@ function getISOWeek(d){ const dt=new Date(d); dt.setHours(0,0,0,0); dt.setDate(d
 function exportExcel(){
   const week=getISOWeek(auditInfo.fecha); const year=new Date(auditInfo.fecha).getFullYear();
   const rows=puntosActivos.map((p,i)=>({
-    'Fecha':auditInfo.fecha, 'Línea':auditInfo.linea, 'Auditor':auditInfo.auditor, 'Semana año':`Semana ${week}/${year}`, 'Bloque':p.bloque, 'Función':p.funcion, 'Compromiso':p.compromiso, 'Cómo verificar':p.como, 'Frecuencia':p.frecuencia, 'Resultado':results[p.id]?.estado||'', 'Observaciones':results[p.id]?.obs||'', 'Fotos adjuntas':results[p.id]?.fotos.length||0, 'Audios adjuntos':results[p.id]?.audios.length||0, 'Plan de acción':''
+    'Fecha':auditInfo.fecha, 'Línea':auditInfo.linea, 'Auditor':auditInfo.auditor, 'Semana año':`Semana ${week}/${year}`, 'Nº':i+1, 'Bloque':p.bloque, 'Función':p.funcion, 'Compromiso':p.compromiso, 'Cómo verificar':p.como, 'Frecuencia':p.frecuencia, 'Resultado':results[p.id]?.estado||'', 'Observaciones':results[p.id]?.obs||'', 'Fotos adjuntas':results[p.id]?.fotos.length||0, 'Audios adjuntos':results[p.id]?.audios.length||0, 'Plan de acción':''
   }));
   const ws=XLSX.utils.json_to_sheet(rows); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Audit"); XLSX.writeFile(wb, `Audit_${auditInfo.linea}.xlsx`);
 }
