@@ -15,39 +15,54 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+
   .hdr{background:var(--accent);padding:.85rem 1.1rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;}
   .hdr-logo{width:34px;height:34px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
   .hdr h1{font-size:14px;font-weight:600;color:#fff;letter-spacing:-0.01em;}
+
   .wrap{padding:1.1rem;max-width:680px;margin:0 auto;}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;box-shadow:var(--shadow);margin-top:1.1rem;}
   .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
   .ff label{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-bottom:3px;text-transform:uppercase;}
   .ff input,.ff select{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-family:inherit;}
+
   .btn{width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;}
   .btn-green{background:var(--accent);color:#fff;}
   .btn-excel{background:#217346;color:#fff;margin-top:10px;}
   .btn-back{background:var(--gray-l);color:var(--muted);border:1px solid var(--border);}
+
   .prog-bar{height:5px;background:var(--border);border-radius:3px;margin-bottom:15px;overflow:hidden;}
   .prog-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s;}
+
   .pc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:.9rem;}
   .pc-hdr{padding:.65rem .9rem;background:var(--gray-l);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;}
   .pc-body{padding:.9rem;}
   .pc-fn{font-size:13px;font-weight:600;margin-bottom:5px;}
-  .pc-como{font-size:12px;color:var(--muted);background:var(--gray-l);padding:8px;border-radius:6px;margin-bottom:10px;line-height:1.4;}
+  .pc-como{font-size:12px;color:var(--muted);background:var(--gray-l);padding:8px;border-radius:6px;margin-bottom:10px;line-height:1.4;border-left:3px solid var(--accent);}
+  
   .rrow{display:flex;gap:5px;margin-bottom:9px;}
-  .rbtn{flex:1;padding:10px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;font-weight:600;font-size:12px;}
+  .rbtn{flex:1;padding:10px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;font-weight:600;font-size:12px;color:var(--muted);}
   .rbtn-ok.sel{background:var(--accent-l);border-color:var(--accent);color:var(--accent);}
   .rbtn-ko.sel{background:var(--danger-l);border-color:var(--danger);color:var(--danger);}
-  .obs{width:100%;padding:8px;font-size:12px;border:1px solid var(--border);border-radius:6px;min-height:60px;margin-bottom:8px;font-family:inherit;}
+
+  .obs{width:100%;padding:8px;font-size:12px;border:1px solid var(--border);border-radius:6px;min-height:60px;margin-bottom:8px;font-family:inherit;resize:none;}
+
   .media-section{background:var(--gray-l);border-radius:8px;padding:10px;margin-top:10px;}
-  .media-btns{display:flex;gap:6px;}
-  .mbtn{background:#fff;border:1px dashed var(--border);padding:8px;border-radius:6px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px;flex:1;justify-content:center;font-weight:500;}
-  .recording{background:var(--danger)!important;color:#fff!important;border-style:solid!important;}
-  .foto-grid{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
-  .fthumb{position:relative;width:60px;height:60px;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+  .media-btns{display:flex;gap:6px;flex-wrap:wrap;}
+  .mbtn{background:#fff;border:1.5px dashed var(--border);padding:8px;border-radius:6px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px;flex:1;justify-content:center;font-weight:600;}
+  .recording{background:var(--danger)!important;color:#fff!important;border-style:solid!important;animation:pulse 1s infinite;}
+  @keyframes pulse{0%{opacity:1}50%{opacity:.7}100%{opacity:1}}
+
+  .foto-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .fthumb{position:relative;width:64px;height:64px;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
   .fthumb img{width:100%;height:100%;object-fit:cover;}
-  .audio-item{display:flex;align-items:center;gap:5px;background:#fff;padding:5px;border-radius:4px;margin-top:5px;border:1px solid var(--border);}
-  .audio-item audio{height:30px;flex:1;}
+  .fdel{position:absolute;top:0;right:0;background:rgba(0,0,0,0.6);color:#fff;border:none;width:20px;height:20px;font-size:10px;display:flex;align-items:center;justify-content:center;}
+
+  .audio-list{margin-top:8px;display:flex;flex-direction:column;gap:5px;}
+  .audio-item{display:flex;align-items:center;gap:6px;background:#fff;padding:6px;border-radius:6px;border:1px solid var(--border);}
+  .audio-item audio{flex:1;height:32px;}
+
+  .nav-row{display:flex;gap:8px;margin-top:10px;}
   .hidden{display:none!important;}
 </style>
 </head>
@@ -60,8 +75,19 @@
     <div class="card">
       <div class="fgrid">
         <div class="ff"><label>Fecha</label><input type="date" id="inp-fecha"/></div>
-        <div class="ff"><label>Línea</label><select id="inp-linea"><option>Línea 1</option><option>Línea 2</option><option>Línea 3</option><option>Línea 4</option></select></div>
+        <div class="ff">
+          <label>Línea</label>
+          <select id="inp-linea">
+            <option>Línea 1</option><option>Línea 2</option><option>Línea 3</option><option>Línea 4</option>
+          </select>
+        </div>
         <div class="ff"><label>Auditor</label><input type="text" id="inp-auditor" placeholder="Nombre..."/></div>
+        <div class="ff">
+          <label>Semana Mes</label>
+          <select id="inp-semana">
+            <option value="1">Semana 1</option><option value="2">Semana 2</option><option value="3">Semana 3</option><option value="4">Semana 4</option>
+          </select>
+        </div>
       </div>
       <button class="btn btn-green" style="margin-top:1.2rem" onclick="startAudit()">Comenzar Auditoría →</button>
     </div>
@@ -70,17 +96,18 @@
   <div id="audit-panel" class="hidden">
     <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
     <div id="puntos-container"></div>
-    <div style="display:flex; gap:8px; margin-top:10px;">
-      <button class="btn btn-back" style="flex:1" onclick="navigate(-1)">← Anterior</button>
-      <button class="btn btn-green" style="flex:1" onclick="navigate(1)">Siguiente →</button>
+    <div class="nav-row">
+      <button class="btn btn-back" style="flex:1" onclick="navigate(-1)">Anterior</button>
+      <button class="btn btn-green" style="flex:1" onclick="navigate(1)">Siguiente</button>
     </div>
-    <button class="btn btn-excel" onclick="exportExcel()">📥 GUARDAR EXCEL</button>
+    <button class="btn btn-excel" style="margin-top:15px;" onclick="exportExcel()">📥 GUARDAR EXCEL</button>
   </div>
 
   <div id="summary-panel" class="hidden">
-    <div class="card">
-      <button class="btn btn-excel" onclick="exportExcel()">⬇ DESCARGAR INFORME (.xlsx)</button>
-      <button class="btn btn-back" onclick="location.reload()" style="margin-top:10px;">Nueva Auditoría</button>
+    <div class="card" style="text-align:center;">
+      <p style="margin-bottom:15px; font-weight:600;">Auditoría Finalizada</p>
+      <button class="btn btn-green" onclick="exportExcel()">⬇ DESCARGAR EXCEL FINAL</button>
+      <button class="btn btn-back" onclick="location.reload()" style="margin-top:10px; width:100%;">Nueva Auditoría</button>
     </div>
   </div>
 </div>
@@ -88,46 +115,58 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const PUNTOS = [
-  {id:1, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Falso rechazo: hacer un muestreo del rechazo, durante 10 minutos, para comprobar si las tortillas han sido correctamente expulsadas en una de las líneas. Comprobar que en la aplicación aparecen todos los defectos que esa tortilla tiene.'},
-  {id:2, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Verificación de expulsión: coger, durante dos minutos, montones de tortillas que salen de la contadora y comprobar que no hay franjas crudas. Comprobar en una de las líneas.'},
-  {id:3, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Ir al visor y ver que las tolerancias son las definidas por AO en una de las líneas.'}
+  {id:1, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Falso rechazo: realizar muestreo durante 10 min.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
+  {id:2, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Verificación mancha azul/negra.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
+  {id:3, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Ausencia franjas crudas en montones de tortillas.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
+  {id:4, bloque:'Fabricar', funcion:'Calidad', compromiso:'Asegurar Calidad', como:'Tipos KO: churro, doble, agujero, plegada, pequeña, harinosa, quemada.', frecuencia:'1 / turno', semanas:[1]},
+  {id:5, bloque:'Fabricar', funcion:'Incidencias', compromiso:'Seguimiento incidencia', como:'Preguntar a 3 JE sobre método actuación si hay 3 seguidas KO.', frecuencia:'1 / turno', semanas:[1,2,3,4]},
+  {id:6, bloque:'Fabricar', funcion:'Incidencias', compromiso:'Seguimiento incidencia', como:'Provocar fallos detectados la semana anterior.', frecuencia:'1 / turno', semanas:[1,3]},
+  {id:7, bloque:'Fabricar', funcion:'Incidencias', compromiso:'Seguimiento incidencia', como:'Provocar los 3 principales inputs de calidad del último mes.', frecuencia:'1 / turno', semanas:[1]},
+  {id:8, bloque:'Fabricar', funcion:'Tolerancias', compromiso:'Parámetros', como:'Verificar parámetros introducidos en visor vs AO.', frecuencia:'1 / turno', semanas:[1]},
+  {id:9, bloque:'Equipos', funcion:'Formación', compromiso:'Capacitación JE', como:'JE saben interpretar pantallas y alarmas.', frecuencia:'1 / turno', semanas:[1,3]},
+  {id:10, bloque:'Equipos', funcion:'Formación', compromiso:'Capacitación JE', como:'Manuales actualizados y disponibles.', frecuencia:'1 / turno', semanas:[1]}
 ];
 
-let results = {}, currentIdx = 0, auditInfo = {}, recorder = null, chunks = [], recordingId = null;
+let results = {}, currentIdx = 0, puntosActivos = [], auditInfo = {}, recorder = null, audioChunks = [], recordingId = null;
 
 function startAudit(){
-  auditInfo = { fecha: document.getElementById('inp-fecha').value, linea: document.getElementById('inp-linea').value, auditor: document.getElementById('inp-auditor').value };
+  const f = document.getElementById('inp-fecha').value;
+  const a = document.getElementById('inp-auditor').value;
+  const s = parseInt(document.getElementById('inp-semana').value);
+  if(!f || !a){ alert('Completa fecha y auditor.'); return; }
+  auditInfo = { fecha:f, linea:document.getElementById('inp-linea').value, auditor:a };
+  puntosActivos = PUNTOS.filter(p => p.semanas.includes(s));
   document.getElementById('setup-panel').classList.add('hidden');
   document.getElementById('audit-panel').classList.remove('hidden');
   renderCurrent();
 }
 
 function renderCurrent(){
-  const p = PUNTOS[currentIdx];
+  const p = puntosActivos[currentIdx];
   const r = results[p.id] || { estado:'', obs:'', fotos:[], audios:[] };
   const isRec = recordingId === p.id;
   document.getElementById('puntos-container').innerHTML = `
     <div class="pc">
-      <div class="pc-hdr"><span>PUNTO ${currentIdx+1}/${PUNTOS.length}</span><strong>${p.bloque}</strong></div>
+      <div class="pc-hdr"><span>PUNTO ${currentIdx+1} / ${puntosActivos.length}</span><strong>${p.bloque}</strong></div>
       <div class="pc-body">
         <div class="pc-fn">${p.funcion}</div>
         <div class="pc-como"><strong>CÓMO VERIFICAR:</strong> ${p.como}</div>
         <div class="rrow">
           <button class="rbtn rbtn-ok ${r.estado==='OK'?'sel':''}" onclick="setEstado(${p.id},'OK')">CONFORME (OK)</button>
-          <button class="rbtn rbtn-ko ${r.estado==='KO'?'sel':''}" onclick="setEstado(${p.id},'KO')">INCIDENCIA (KO)</button>
+          <button class="rbtn rbtn-ko ${r.estado==='KO'?'sel':''}" onclick="setEstado(${p.id},'KO')">NO CONFORME (KO)</button>
         </div>
-        <textarea class="obs" onchange="saveObs(${p.id},this.value)" placeholder="Observaciones...">${r.obs}</textarea>
+        <textarea class="obs" placeholder="Observaciones..." onchange="saveObs(${p.id}, this.value)">${r.obs}</textarea>
         <div class="media-section">
           <div class="media-btns">
-            <label class="mbtn">📷 Foto<input type="file" accept="image/*" capture="environment" hidden onchange="addFoto(${p.id},this)"></label>
-            <button class="mbtn ${isRec?'recording':''}" onclick="toggleAudio(${p.id})">${isRec?'⏹ Parar':'🎙 Audio'} (${r.audios.length})</button>
+            <label class="mbtn">📷 Cámara<input type="file" accept="image/*" capture="environment" hidden onchange="addFoto(${p.id}, this)"></label>
+            <button class="mbtn ${isRec?'recording':''}" onclick="toggleAudio(${p.id})">${isRec?'⏹ PARAR':'🎙 AUDIO'} (${r.audios.length})</button>
           </div>
-          <div class="foto-grid">${r.fotos.map(f=>`<div class="fthumb"><img src="${f}"></div>`).join('')}</div>
-          <div id="audios-${p.id}">${r.audios.map(a=>`<div class="audio-item"><audio src="${a}" controls></audio></div>`).join('')}</div>
+          <div class="foto-grid">${r.fotos.map((f,i)=>`<div class="fthumb"><img src="${f}"><button class="fdel" onclick="delFoto(${p.id},${i})">✕</button></div>`).join('')}</div>
+          <div class="audio-list">${r.audios.map((a,i)=>`<div class="audio-item"><audio src="${a}" controls></audio><button class="fdel" style="position:static; width:30px; height:30px;" onclick="delAudio(${p.id},${i})">🗑</button></div>`).join('')}</div>
         </div>
       </div>
     </div>`;
-  document.getElementById('prog-fill').style.width = ((currentIdx+1)/PUNTOS.length*100)+'%';
+  document.getElementById('prog-fill').style.width = ((currentIdx+1)/puntosActivos.length*100)+'%';
 }
 
 function setEstado(id,v){ if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]}; results[id].estado=v; renderCurrent(); }
@@ -137,37 +176,36 @@ function addFoto(id,input){
   reader.onload = (e) => { if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]}; results[id].fotos.push(e.target.result); renderCurrent(); };
   reader.readAsDataURL(input.files[0]);
 }
+function delFoto(id,i){ results[id].fotos.splice(i,1); renderCurrent(); }
+function delAudio(id,i){ results[id].audios.splice(i,1); renderCurrent(); }
 
 async function toggleAudio(id){
   if(recordingId === id){ recorder.stop(); return; }
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   recorder = new MediaRecorder(stream);
-  chunks = [];
+  audioChunks = [];
   recordingId = id;
-  recorder.ondataavailable = e => chunks.push(e.data);
+  recorder.ondataavailable = e => audioChunks.push(e.data);
   recorder.onstop = () => {
     const reader = new FileReader();
-    reader.onload = (e) => { 
-      if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]};
-      results[id].audios.push(e.target.result); recordingId = null; renderCurrent(); 
-    };
-    reader.readAsDataURL(new Blob(chunks));
+    reader.onload = (e) => { if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]}; results[id].audios.push(e.target.result); recordingId=null; renderCurrent(); };
+    reader.readAsDataURL(new Blob(audioChunks));
     stream.getTracks().forEach(t => t.stop());
   };
   recorder.start();
   renderCurrent();
 }
 
-function navigate(d){ let n=currentIdx+d; if(n>=0 && n<PUNTOS.length){currentIdx=n;renderCurrent();} else if(n>=PUNTOS.length){document.getElementById('audit-panel').classList.add('hidden');document.getElementById('summary-panel').classList.remove('hidden');} }
+function navigate(d){ let n=currentIdx+d; if(n>=0 && n<puntosActivos.length){currentIdx=n;renderCurrent();}else if(n>=puntosActivos.length){document.getElementById('audit-panel').classList.add('hidden');document.getElementById('summary-panel').classList.remove('hidden');} }
 
 function exportExcel(){
-  const rows = PUNTOS.map((p,i)=>({
-    'Fecha':auditInfo.fecha, 'Línea':auditInfo.linea, 'Auditor':auditInfo.auditor, 'Nº':i+1, 'Bloque':p.bloque, 'Función':p.funcion, 'Resultado':results[p.id]?.estado||'', 'Observaciones':results[p.id]?.obs||'', 'Evidencias':(results[p.id]?.fotos.length||0)+' fotos y '+(results[p.id]?.audios.length||0)+' audios'
+  const rows = puntosActivos.map((p,i)=>({
+    'Fecha':auditInfo.fecha, 'Línea':auditInfo.linea, 'Auditor':auditInfo.auditor, 'Bloque':p.bloque, 'Función':p.funcion, 'Compromiso':p.compromiso, 'Cómo verificar':p.como, 'Frecuencia':p.frecuencia, 'Resultado':results[p.id]?.estado||'', 'Observaciones':results[p.id]?.obs||'', 'Evidencias':(results[p.id]?.fotos.length||0)+' fotos y '+(results[p.id]?.audios.length||0)+' audios'
   }));
-  const ws=XLSX.utils.json_to_sheet(rows);
-  const wb=XLSX.utils.book_new();
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Audit");
-  XLSX.writeFile(wb, `Auditoria_${auditInfo.linea}.xlsx`);
+  XLSX.writeFile(wb, `Audit_${auditInfo.linea}.xlsx`);
 }
 document.getElementById('inp-fecha').value = new Date().toISOString().split('T')[0];
 </script>
