@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <title>Auditoría Visores — Delibreads</title>
   <style>
-    /* Todo el estilo que ya tenías */
+    /* Tu estilo original aquí */
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
     :root{
       --bg:#f5f4f0;--surface:#fff;--border:#e0ddd6;--text:#1a1916;--muted:#6b6860;
@@ -31,78 +31,15 @@
     .btn{width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;}
     .btn:active{opacity:.85;}
     .btn-green{background:var(--accent);color:#fff;margin-top:.85rem;}
-    .btn-excel{background:#217346;color:#fff;}
-    .btn-pdf{background:#9b2226;color:#fff;}
     .btn-blue{background:var(--blue);color:#fff;}
     .btn-back{background:var(--gray-l);color:var(--muted);border:1px solid var(--border);}
-    .btn-stack{display:flex;flex-direction:column;gap:8px;margin-top:.85rem;}
     .mini{font-size:11px;color:var(--muted);line-height:1.5;}
     .status-box{padding:9px 10px;border-radius:8px;border:1px solid var(--border);background:var(--gray-l);font-size:12px;line-height:1.5;margin-top:.75rem;}
     .status-box.ok{background:var(--accent-l);border-color:#bfd7ca;color:var(--accent);}
     .status-box.err{background:var(--danger-l);border-color:#efc7c7;color:var(--danger);}
-    .prog-wrap{margin-bottom:1.1rem;}
-    .prog-top{display:flex;justify-content:space-between;margin-bottom:5px;}
-    .prog-top span{font-size:12px;color:var(--muted);}
-    .prog-top strong{font-size:12px;font-weight:600;font-family:'IBM Plex Mono';color:var(--accent);}
-    .prog-bar{height:5px;background:var(--border);border-radius:3px;}
-    .prog-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s;}
-    .pc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:.9rem;}
-    .pc.active{border:1.5px solid var(--accent);}
-    .pc.ok{border-left:4px solid var(--accent);}
-    .pc.ko{border-left:4px solid var(--danger);}
-    .pc.na{border-left:4px solid var(--gray);}
-    .pc-hdr{padding:.65rem .9rem;background:var(--gray-l);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
-    .pc-num{font-family:'IBM Plex Mono';font-size:11px;color:var(--muted);}
-    .tag{font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.03em;}
-    .tag-fab{background:var(--blue-l);color:var(--blue);}
-    .tag-gest{background:var(--accent-l);color:var(--accent);}
-    .tag-freq{background:var(--warn-l);color:var(--warn);}
-    .tag-dur{background:var(--gray-l);color:var(--muted);}
-    .pc-body{padding:.9rem;}
-    .pc-fn{font-size:13px;font-weight:600;margin-bottom:5px;}
-    .pc-como{font-size:12px;color:var(--muted);line-height:1.6;padding:7px 9px;background:var(--gray-l);border-radius:6px;border-left:3px solid var(--border);margin-bottom:10px;}
-    .pc-como strong{color:var(--text);display:block;margin-bottom:2px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;}
-    .rrow{display:flex;gap:5px;margin-bottom:9px;}
-    .rbtn{flex:1;padding:10px 4px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;font-size:12px;font-weight:500;font-family:'IBM Plex Sans',sans-serif;background:var(--surface);color:var(--muted);text-align:center;}
-    .rbtn-ok.sel{background:var(--accent-l);border-color:var(--accent);color:var(--accent);}
-    .rbtn-ko.sel{background:var(--danger-l);border-color:var(--danger);color:var(--danger);}
-    .rbtn-na.sel{background:var(--gray-l);border-color:var(--gray);color:var(--gray);}
-    .obs{width:100%;padding:8px 9px;font-size:12px;line-height:1.6;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);resize:vertical;min-height:54px;font-family:'IBM Plex Sans',sans-serif;margin-bottom:8px;}
-    .media-section{background:var(--gray-l);border-radius:8px;padding:9px;margin-bottom:4px;}
-    .media-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px;}
-    .media-btns{display:flex;gap:6px;flex-wrap:wrap;}
-    .mbtn{display:inline-flex;align-items:center;gap:5px;padding:8px 12px;border-radius:7px;border:1.5px dashed var(--border);cursor:pointer;font-size:12px;font-weight:500;color:var(--text);background:var(--surface);font-family:'IBM Plex Sans',sans-serif;}
-    .mbtn:active{background:var(--gray-l);}
-    .mbtn-rec{border-color:var(--danger);color:var(--danger);}
-    .mbtn-rec.recording{background:var(--danger);color:#fff;border-style:solid;animation:pulse 1s infinite;}
-    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.7;}}
-    .foto-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;}
-    .fthumb{position:relative;width:68px;height:68px;border-radius:6px;overflow:hidden;border:1px solid var(--border);}
-    .fthumb img{width:100%;height:100%;object-fit:cover;}
-    .fdel{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;font-size:9px;display:flex;align-items:center;justify-content:center;}
-    .audio-list{margin-top:7px;display:flex;flex-direction:column;gap:5px;}
-    .audio-item{display:flex;align-items:center;gap:7px;background:var(--surface);border-radius:6px;padding:6px 9px;border:1px solid var(--border);}
-    .audio-item audio{flex:1;height:32px;}
-    .audio-del{background:none;border:none;color:var(--danger);cursor:pointer;font-size:13px;padding:2px 5px;}
-    .nav-row{display:flex;gap:8px;align-items:center;margin-top:.5rem;flex-wrap:wrap;}
-    .nbtn{padding:10px 16px;border-radius:8px;border:1px solid var(--border);cursor:pointer;font-size:13px;font-weight:500;font-family:'IBM Plex Sans',sans-serif;background:var(--surface);color:var(--text);}
-    .nbtn-primary{background:var(--accent);color:#fff;border-color:var(--accent);}
-    .nbtn-sm{padding:10px 11px;font-size:12px;margin-left:auto;}
-    .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:1rem 0;}
-    .stile{border-radius:8px;padding:13px;text-align:center;}
-    .stile.ok{background:var(--accent-l);}.stile.ko{background:var(--danger-l);}.stile.na{background:var(--gray-l);}
-    .snum{font-size:28px;font-weight:600;font-family:'IBM Plex Mono';}
-    .stile.ok .snum{color:var(--accent);}.stile.ko .snum{color:var(--danger);}.stile.na .snum{color:var(--gray);}
-    .slbl{font-size:11px;color:var(--muted);margin-top:2px;}
-    .ko-item{padding:8px 9px;background:var(--danger-l);border-radius:6px;border-left:3px solid var(--danger);margin-bottom:5px;font-size:12px;color:var(--danger);}
     .divider{height:1px;background:var(--border);margin:.9rem 0;}
     .exp-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px;}
     .hidden{display:none!important;}
-    @media print{
-      .hdr,.nav-row,.btn,.media-section,.fdel,.audio-del{display:none!important;}
-      body{background:#fff;}
-      .pc{box-shadow:none;break-inside:avoid;}
-    }
   </style>
 </head>
 <body>
@@ -111,7 +48,19 @@
     <div><h1>Asistente de Auditoría</h1><p>Visores de tortillas — Delibreads</p></div>
   </div>
   <div class="wrap">
-    <div class="card">
+    <!-- Formulario de inicio de sesión -->
+    <div id="login-panel" class="card">
+      <div class="card-title">Inicio de sesión</div>
+      <div class="fgrid">
+        <div class="ff full"><label>Correo electrónico</label><input type="email" id="email" placeholder="Introduce tu correo electrónico" required/></div>
+        <div class="ff full"><label>Contraseña</label><input type="password" id="password" placeholder="Introduce tu contraseña" required/></div>
+      </div>
+      <button class="btn btn-blue" onclick="login()">Iniciar sesión</button>
+      <div class="status-box" id="login-status">No estás logueado. Ingresa tus datos.</div>
+    </div>
+
+    <!-- Conexión a Supabase -->
+    <div id="supabase-panel" class="card hidden">
       <div class="card-title">Conexión Supabase</div>
       <div class="fgrid">
         <div class="ff full"><label>Supabase URL</label><input type="text" id="supabase-url" placeholder="https://xxxx.supabase.co"/></div>
@@ -121,29 +70,28 @@
       </div>
       <button class="btn btn-blue" onclick="saveSupabaseSettings()">Guardar conexión</button>
       <div class="status-box" id="cloud-status">Sin conectar. Guarda la URL y la anon key para poder subir fotos, audios y la auditoría.</div>
-      <p class="mini" style="margin-top:.65rem;">Esta configuración se guarda en este navegador. La auditoría y las evidencias se suben a Supabase cuando pulses <strong>Guardar auditoría en nube</strong>.</p>
     </div>
 
-    <div id="setup-panel">
-      <div class="card">
-        <div class="card-title">Datos de la auditoría</div>
-        <div class="fgrid">
-          <div class="ff"><label>Fecha</label><input type="date" id="inp-fecha"/></div>
-          <div class="ff"><label>Línea auditada</label><input type="text" id="inp-linea" placeholder="Ej: Línea 1"/></div>
-          <div class="ff"><label>Auditor</label><input type="text" id="inp-auditor" placeholder="Tu nombre"/></div>
-          <div class="ff"><label>Semana del mes</label>
-            <select id="inp-semana">
-              <option value="1">Semana 1 — semanales + mensuales</option>
-              <option value="2">Semana 2 — solo semanales</option>
-              <option value="3">Semana 3 — semanales + quincenales</option>
-              <option value="4">Semana 4 — solo semanales</option>
-            </select>
-          </div>
+    <!-- Datos de la auditoría -->
+    <div id="setup-panel" class="card hidden">
+      <div class="card-title">Datos de la auditoría</div>
+      <div class="fgrid">
+        <div class="ff"><label>Fecha</label><input type="date" id="inp-fecha" required/></div>
+        <div class="ff"><label>Línea auditada</label><input type="text" id="inp-linea" placeholder="Ej: Línea 1" required/></div>
+        <div class="ff"><label>Auditor</label><input type="text" id="inp-auditor" placeholder="Tu nombre" required/></div>
+        <div class="ff"><label>Semana del mes</label>
+          <select id="inp-semana">
+            <option value="1">Semana 1 — semanales + mensuales</option>
+            <option value="2">Semana 2 — solo semanales</option>
+            <option value="3">Semana 3 — semanales + quincenales</option>
+            <option value="4">Semana 4 — solo semanales</option>
+          </select>
         </div>
-        <button class="btn btn-green" onclick="startAudit()">Iniciar auditoría →</button>
       </div>
+      <button class="btn btn-green" onclick="startAudit()">Iniciar auditoría →</button>
     </div>
 
+    <!-- Auditar panel (Oculto) -->
     <div id="audit-panel" class="hidden">
       <div class="prog-wrap" style="margin-top:1.1rem;">
         <div class="prog-top">
@@ -160,6 +108,7 @@
       </div>
     </div>
 
+    <!-- Resumen de auditoría -->
     <div id="summary-panel" class="hidden">
       <div class="card">
         <div class="card-title" id="sum-title">Resumen de auditoría</div>
@@ -175,4 +124,87 @@
           <button class="btn btn-blue" onclick="saveAuditToCloud()">☁️ Guardar auditoría en nube</button>
           <button class="btn btn-excel" onclick="exportExcel()">⬇ Descargar Excel (.xlsx)</button>
           <button class="btn btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
-        </div
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    let userAuthenticated = false;
+
+    // Login function
+    async function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const { user, error } = await supabase.auth.signInWithPassword({ email, password });
+      
+      if (error) {
+        document.getElementById('login-status').textContent = 'Error al iniciar sesión: ' + error.message;
+        return;
+      }
+      
+      userAuthenticated = true;
+      document.getElementById('login-status').textContent = 'Usuario autenticado';
+      document.getElementById('login-panel').classList.add('hidden');
+      document.getElementById('supabase-panel').classList.remove('hidden');
+    }
+
+    // Check if user is authenticated
+    async function checkAuthentication() {
+      const user = await supabase.auth.getUser();
+      if (!user || !user.data) {
+        alert("No has iniciado sesión. Por favor, inicia sesión para continuar con la auditoría.");
+        window.location.href = '/login';
+        return false;
+      }
+      return true;
+    }
+
+    async function saveSupabaseSettings() {
+      const cfg = getSupabaseSettings();
+      if (!cfg.url || !cfg.anonKey) {
+        setStatus('cloud-status', 'Falta la URL o la anon key de Supabase.', 'err');
+        return;
+      }
+      localStorage.setItem('supabase-config', JSON.stringify(cfg));
+      initSupabaseClient();
+    }
+
+    function getSupabaseSettings() {
+      return {
+        url: document.getElementById('supabase-url').value.trim(),
+        anonKey: document.getElementById('supabase-anon-key').value.trim(),
+        bucket: document.getElementById('supabase-bucket').value.trim(),
+        table: document.getElementById('supabase-table').value.trim(),
+      };
+    }
+
+    function initSupabaseClient() {
+      const cfg = getSupabaseSettings();
+      if (!cfg.url || !cfg.anonKey) {
+        supabaseClient = null;
+        setStatus('cloud-status', 'Sin conectar. Guarda la URL y la anon key para poder subir fotos, audios y la auditoría.');
+        return;
+      }
+
+      supabaseClient = supabase.createClient(cfg.url, cfg.anonKey);
+      setStatus('cloud-status', `Configuración guardada. Bucket: ${cfg.bucket} · Tabla: ${cfg.table}`, 'ok');
+    }
+
+    function setStatus(elId, msg, type = '') {
+      const el = document.getElementById(elId);
+      if (!el) return;
+      el.className = 'status-box' + (type ? ` ${type}` : '');
+      el.textContent = msg;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      loadSupabaseSettings();
+      initSupabaseClient();
+    });
+  </script>
+</body>
+</html>
