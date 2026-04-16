@@ -9,7 +9,7 @@
   :root{
     --bg:#f5f4f0;--surface:#fff;--border:#e0ddd6;--text:#1a1916;--muted:#6b6860;
     --accent:#1a5c3a;--accent-l:#e8f3ed;--danger:#b83232;--danger-l:#fdf0f0;
-    --warn:#8a6000;--warn-l:#fef9ec;--gray:#9a9790;--gray-l:#f0efe9;
+    --warn:#8a6000;--warn-l:#Afef9ec;--gray:#9a9790;--gray-l:#f0efe9;
     --blue:#1e4d8c;--blue-l:#edf2fb;--r:10px;
     --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);
   }
@@ -544,41 +544,37 @@ loadDraft();
 initSupabaseClient();
 </script>
   
-// Función para verificar si el usuario está autenticado
-async function checkAuthentication() {
-  const user = await supabaseClient.auth.getUser();
-
-  if (!user || !user.data) {
-    // Si no hay usuario autenticado, redirigir al login
-    alert("No has iniciado sesión. Por favor, inicia sesión para continuar con la auditoría.");
-    window.location.href = '/login';  // Redirigir a la página de login
-    return false;
+<script>
+  // Aquí va todo tu código JavaScript
+  async function checkAuthentication() {
+    const user = await supabaseClient.auth.getUser();
+    if (!user || !user.data) {
+      alert("No has iniciado sesión. Por favor, inicia sesión para continuar con la auditoría.");
+      window.location.href = '/login';  // Redirigir a la página de login
+      return false;
+    }
+    return true; // Si el usuario está autenticado
   }
 
-  return true; // Si el usuario está autenticado
-}
-
-// Aseguramos que solo se puede iniciar la auditoría si el usuario está autenticado
-async function startAudit() {
-  const isAuthenticated = await checkAuthentication();  // Verificamos si está autenticado
-
-  if (isAuthenticated) {
-    // Si está autenticado, continuar con la auditoría
-    auditInfo = {
-      fecha: document.getElementById('inp-fecha').value || new Date().toISOString().split('T')[0],
-      linea: document.getElementById('inp-linea').value || '—',
-      auditor: document.getElementById('inp-auditor').value || '—'
-    };
-    semanaActual = parseInt(document.getElementById('inp-semana').value, 10);
-    puntosActivos = PUNTOS.filter(p => p.semanas.includes(semanaActual));
-    document.getElementById('setup-panel').classList.add('hidden');
-    document.getElementById('audit-panel').classList.remove('hidden');
-    if (currentIdx >= puntosActivos.length) currentIdx = 0;
-    if (viewAll) { reRenderAll(); document.getElementById('nav-row').classList.add('hidden'); }
-    else renderCurrent();
-    persistDraft();
+  async function startAudit() {
+    const isAuthenticated = await checkAuthentication();  // Verificamos si está autenticado
+    if (isAuthenticated) {
+      // Si está autenticado, continuar con la auditoría
+      auditInfo = {
+        fecha: document.getElementById('inp-fecha').value || new Date().toISOString().split('T')[0],
+        linea: document.getElementById('inp-linea').value || '—',
+        auditor: document.getElementById('inp-auditor').value || '—'
+      };
+      semanaActual = parseInt(document.getElementById('inp-semana').value, 10);
+      puntosActivos = PUNTOS.filter(p => p.semanas.includes(semanaActual));
+      document.getElementById('setup-panel').classList.add('hidden');
+      document.getElementById('audit-panel').classList.remove('hidden');
+      if (currentIdx >= puntosActivos.length) currentIdx = 0;
+      if (viewAll) { reRenderAll(); document.getElementById('nav-row').classList.add('hidden'); }
+      else renderCurrent();
+      persistDraft();
+    }
   }
-}
 </script>
 </body>
 </html>
