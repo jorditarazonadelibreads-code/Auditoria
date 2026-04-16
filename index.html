@@ -543,129 +543,41 @@ loadSupabaseSettings();
 loadDraft();
 initSupabaseClient();
 </script>
-  <!-- Formulario de Login -->
-<div id="login-form" style="display:block;">
-  <input type="email" id="login-email" placeholder="Correo electrónico" />
-  <input type="password" id="login-password" placeholder="Contraseña" />
-  <button onclick="loginUser()">Iniciar sesión</button>
-  <p>¿No tienes cuenta? <a href="#" onclick="toggleForms()">Regístrate aquí</a></p>
-</div>
+// Función para verificar si el usuario está autenticado
+async function checkAuthentication() {
+  const user = await supabaseClient.auth.getUser();
 
-<!-- Formulario de Registro -->
-<div id="register-form" style="display:none;">
-  <input type="email" id="register-email" placeholder="Correo electrónico" />
-  <input type="password" id="register-password" placeholder="Contraseña" />
-  <button onclick="registerUser()">Registrarse</button>
-  <p>¿Ya tienes cuenta? <a href="#" onclick="toggleForms()">Inicia sesión aquí</a></p>
-</div>
-
-<!-- Formulario de Logout (solo visible cuando se está autenticado) -->
-<div id="logout-form" style="display:none;">
-  <p>Bienvenido, <span id="user-email"></span>!</p>
-  <button onclick="logoutUser()">Cerrar sesión</button>
-</div>
-
-<!-- Formulario de contenido protegido -->
-<div id="protected-content" style="display:none;">
-  <p>Contenido privado aquí...</p>
-</div>
-
-<script>
-  // Inicialización de Supabase
-  const supabase = createClient('https://your-project-id.supabase.co', 'your-public-api-key');
-
-  // Función para el registro de usuario
-  async function registerUser() {
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
-
-    const { user, error } = await supabase.auth.signUp({ email, password });
-
-    if (error) {
-      alert('Error: ' + error.message);
-    } else {
-      alert('¡Registro exitoso! Revisa tu correo para confirmar.');
-      toggleForms(); // Cambia al formulario de login
-    }
+  if (!user || !user.data) {
+    // Si no hay usuario autenticado, redirigir al login
+    alert("No has iniciado sesión. Por favor, inicia sesión para continuar con la auditoría.");
+    window.location.href = '/login';  // Redirigir a la página de login
+    return false;
   }
 
-  // Función para el login de usuario
-  async function loginUser() {
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+  return true; // Si el usuario está autenticado
+}
 
-    const { user, error } = await supabase.auth.signInWithPassword({ email, password });
+// Aseguramos que solo se puede iniciar la auditoría si el usuario está autenticado
+async function startAudit() {
+  const isAuthenticated = await checkAuthentication();  // Verificamos si está autenticado
 
-    if (error) {
-      alert('Error: ' + error.message);
-    } else {
-      alert('¡Inicio de sesión exitoso!');
-      displayUserInfo(user);
-      showProtectedContent();  // Muestra contenido protegido
-    }
+  if (isAuthenticated) {
+    // Si está autenticado, continuar con la auditoría
+    auditInfo = {
+      fecha: document.getElementById('inp-fecha').value || new Date().toISOString().split('T')[0],
+      linea: document.getElementById('inp-linea').value || '—',
+      auditor: document.getElementById('inp-auditor').value || '—'
+    };
+    semanaActual = parseInt(document.getElementById('inp-semana').value, 10);
+    puntosActivos = PUNTOS.filter(p => p.semanas.includes(semanaActual));
+    document.getElementById('setup-panel').classList.add('hidden');
+    document.getElementById('audit-panel').classList.remove('hidden');
+    if (currentIdx >= puntosActivos.length) currentIdx = 0;
+    if (viewAll) { reRenderAll(); document.getElementById('nav-row').classList.add('hidden'); }
+    else renderCurrent();
+    persistDraft();
   }
-
-  // Función para cerrar sesión
-  async function logoutUser() {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      alert('Error al cerrar sesión: ' + error.message);
-    } else {
-      alert('Has cerrado sesión correctamente.');
-      showLoginForm();
-    }
-  }
-
-  // Mostrar el contenido de la auditoría solo cuando el usuario esté autenticado
-  function showProtectedContent() {
-    document.getElementById('protected-content').style.display = 'block';
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('register-form').style.display = 'none';
-    document.getElementById('logout-form').style.display = 'block';
-  }
-
-  // Muestra el formulario de login
-  function showLoginForm() {
-    document.getElementById('protected-content').style.display = 'none';
-    document.getElementById('login-form').style.display = 'block';
-    document.getElementById('register-form').style.display = 'none';
-    document.getElementById('logout-form').style.display = 'none';
-  }
-
-  // Muestra el formulario de registro
-  function showRegisterForm() {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('register-form').style.display = 'block';
-  }
-
-  // Alterna entre los formularios de login y registro
-  function toggleForms() {
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    if (loginForm.style.display === 'none') {
-      loginForm.style.display = 'block';
-      registerForm.style.display = 'none';
-    } else {
-      loginForm.style.display = 'none';
-      registerForm.style.display = 'block';
-    }
-  }
-
-  // Al cargar la página, verifica si el usuario está autenticado
-  document.addEventListener('DOMContentLoaded', async () => {
-    const user = supabase.auth.user();
-    if (user) {
-      displayUserInfo(user);
-      showProtectedContent();  // Muestra el contenido de la auditoría
-    } else {
-      showLoginForm(); // Si no hay usuario autenticado, muestra el formulario de login
-    }
-  });
-
-  // Muestra la información del usuario
-  function displayUserInfo(user) {
-    document.getElementById('user-email').textContent = user.email;
-  }
-</script>
+}
+  
 </body>
 </html>
