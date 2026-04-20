@@ -167,7 +167,11 @@
   <div class="hdr">
     <div class="hdr-logo">🔍</div>
     <div><h1>Asistente de Auditoría</h1><p>Visores de tortillas — Delibreads</p></div>
-    <button class="hdr-logout" onclick="doLogout()">Cerrar sesión</button>
+    <div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;">
+      <button class="hdr-logout" id="hdr-btn-resumen" style="display:none;background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.4);" onclick="showSummary()">📋 Ver resumen</button>
+      <button class="hdr-logout" style="background:rgba(255,204,0,.25);border-color:rgba(255,204,0,.5);color:#fff;" onclick="nuevaAuditoria()">🆕 Nueva</button>
+      <button class="hdr-logout" onclick="doLogout()">Cerrar sesión</button>
+    </div>
   </div>
   <div class="wrap">
     <div class="card">
@@ -534,7 +538,10 @@ function addFoto(id, input){ if(!input.files||!input.files[0])return; readAndQue
 function addFotoGaleria(id, input){ if(!input.files||!input.files.length)return; Array.from(input.files).forEach(f=>readAndQueueFoto(id,f)); input.value=''; }
 function readAndQueueFoto(id, file){
   ensureResult(id);
-  results[id].fotos.push({name:file.name||`foto_${Date.now()}.jpg`, file, preview:URL.createObjectURL(file), uploaded:false, url:'', storagePath:''});
+  const n = results[id].fotos.length + 1;
+  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+  const namedFile = new File([file], `imagen_${n}.${ext}`, {type: file.type});
+  results[id].fotos.push({name:`imagen_${n}.${ext}`, file:namedFile, preview:URL.createObjectURL(file), uploaded:false, url:'', storagePath:''});
   persistDraft();
   viewAll?reRenderAll():renderCurrent();
 }
@@ -579,13 +586,13 @@ function delAudio(id,ai){ ensureResult(id); const item=results[id].audios[ai]; i
 
 function setEstado(id,estado){ ensureResult(id); results[id].estado=estado; const obs=document.getElementById('obs-'+id); if(obs)results[id].obs=obs.value; persistDraft(); viewAll?reRenderAll():renderCurrent(); updateProgress(); }
 function saveObs(id){ ensureResult(id); const o=document.getElementById('obs-'+id); if(o)results[id].obs=o.value; persistDraft(); }
-function renderCurrent(){ viewAll=false; document.getElementById('puntos-container').innerHTML=buildPunto(puntosActivos[currentIdx],currentIdx,true); document.getElementById('btn-prev').style.display=currentIdx===0?'none':''; document.getElementById('btn-next').textContent=currentIdx===puntosActivos.length-1?'Ver resumen →':'Siguiente →'; document.getElementById('nav-row').classList.remove('hidden'); updateProgress(); }
+function renderCurrent(){ viewAll=false; document.getElementById('puntos-container').innerHTML=buildPunto(puntosActivos[currentIdx],currentIdx,true); document.getElementById('btn-prev').style.display=currentIdx===0?'none':''; document.getElementById('btn-next').textContent=currentIdx===puntosActivos.length-1?'Ver resumen →':'Siguiente →'; document.getElementById('nav-row').classList.remove('hidden'); document.getElementById('hdr-btn-resumen').style.display='none'; updateProgress(); }
 function reRenderAll(){ document.getElementById('puntos-container').innerHTML=puntosActivos.map((p,i)=>buildPunto(p,i,false)).join(''); updateProgress(); }
-function showAll(){ viewAll=true; reRenderAll(); document.getElementById('nav-row').classList.add('hidden'); persistDraft(); }
+function showAll(){ viewAll=true; reRenderAll(); document.getElementById('nav-row').classList.add('hidden'); document.getElementById('hdr-btn-resumen').style.display=''; persistDraft(); }
 function navigate(dir){ saveObs(puntosActivos[currentIdx].id); if(dir===1&&currentIdx===puntosActivos.length-1){showSummary(); return;} currentIdx=Math.max(0,Math.min(puntosActivos.length-1,currentIdx+dir)); persistDraft(); renderCurrent(); }
 function updateProgress(){ const done=puntosActivos.filter(p=>results[p.id]?.estado).length; const pct=puntosActivos.length?Math.round(done/puntosActivos.length*100):0; document.getElementById('prog-fill').style.width=pct+'%'; document.getElementById('prog-label').textContent=`${done} de ${puntosActivos.length} completados`; document.getElementById('prog-pct').textContent=pct+'%'; }
 function showSummary(){ if(puntosActivos[currentIdx])saveObs(puntosActivos[currentIdx].id); document.getElementById('audit-panel').classList.add('hidden'); document.getElementById('summary-panel').classList.remove('hidden'); const week=getISOWeek(auditInfo.fecha); const year=new Date(auditInfo.fecha).getFullYear(); document.getElementById('sum-title').textContent=`Auditoría · ${auditInfo.linea} · Semana ${week}/${year}`; const ok=puntosActivos.filter(p=>results[p.id]?.estado==='OK').length; const ko=puntosActivos.filter(p=>results[p.id]?.estado==='KO').length; const na=puntosActivos.filter(p=>results[p.id]?.estado==='N/A').length; document.getElementById('s-ok').textContent=ok; document.getElementById('s-ko').textContent=ko; document.getElementById('s-na').textContent=na; const koItems=puntosActivos.filter(p=>results[p.id]?.estado==='KO'); document.getElementById('ko-list').innerHTML=koItems.length?'<div style="margin-bottom:.4rem;font-size:12px;font-weight:600;color:var(--danger)">Incidencias:</div>'+koItems.map(p=>`<div class="ko-item"><strong>Punto ${puntosActivos.indexOf(p)+1}:</strong> ${p.funcion}<br><span style="opacity:.75">${results[p.id]?.obs||'Sin observaciones'}</span></div>`).join(''):'<p style="font-size:12px;color:var(--accent);padding:6px 0">✓ Sin incidencias detectadas</p>'; persistDraft(); }
-function backToAudit(){ document.getElementById('summary-panel').classList.add('hidden'); document.getElementById('audit-panel').classList.remove('hidden'); if(viewAll)showAll(); else renderCurrent(); }
+function backToAudit(){ document.getElementById('summary-panel').classList.add('hidden'); document.getElementById('audit-panel').classList.remove('hidden'); document.getElementById('hdr-btn-resumen').style.display='none'; if(viewAll)showAll(); else renderCurrent(); }
 
 async function uploadEvidence(file, pointId, type){
   const client=supabaseClient || initSupabaseClient();
