@@ -1,66 +1,176 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-  <title>Auditoría Visores — Delibreads</title>
-  <style>
-    /* Tu estilo original aquí */
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
-    :root{
-      --bg:#f5f4f0;--surface:#fff;--border:#e0ddd6;--text:#1a1916;--muted:#6b6860;
-      --accent:#1a5c3a;--accent-l:#e8f3ed;--danger:#b83232;--danger-l:#fdf0f0;
-      --warn:#8a6000;--warn-l:#Afef9ec;--gray:#9a9790;--gray-l:#f0efe9;
-      --blue:#1e4d8c;--blue-l:#edf2fb;--r:10px;
-      --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);
-    }
-    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-    body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
-    .hdr{background:var(--accent);padding:.85rem 1.1rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;}
-    .hdr-logo{width:34px;height:34px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
-    .hdr h1{font-size:14px;font-weight:600;color:#fff;}
-    .hdr p{font-size:11px;color:rgba(255,255,255,.65);margin-top:1px;}
-    .wrap{padding:1.1rem;max-width:680px;margin:0 auto;}
-    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;box-shadow:var(--shadow);margin-top:1.1rem;}
-    .card-title{font-size:14px;font-weight:600;margin-bottom:.85rem;}
-    .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
-    .ff label{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em;}
-    .ff input,.ff select,.ff textarea{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:'IBM Plex Sans',sans-serif;-webkit-appearance:none;}
-    .ff textarea{min-height:70px;resize:vertical;}
-    .full{grid-column:1/-1;}
-    .btn{width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;}
-    .btn:active{opacity:.85;}
-    .btn-green{background:var(--accent);color:#fff;margin-top:.85rem;}
-    .btn-blue{background:var(--blue);color:#fff;}
-    .btn-back{background:var(--gray-l);color:var(--muted);border:1px solid var(--border);}
-    .mini{font-size:11px;color:var(--muted);line-height:1.5;}
-    .status-box{padding:9px 10px;border-radius:8px;border:1px solid var(--border);background:var(--gray-l);font-size:12px;line-height:1.5;margin-top:.75rem;}
-    .status-box.ok{background:var(--accent-l);border-color:#bfd7ca;color:var(--accent);}
-    .status-box.err{background:var(--danger-l);border-color:#efc7c7;color:var(--danger);}
-    .divider{height:1px;background:var(--border);margin:.9rem 0;}
-    .exp-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px;}
-    .hidden{display:none!important;}
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<title>Auditoría Visores — Delibreads</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+  :root{
+    --bg:#f5f4f0;--surface:#fff;--border:#e0ddd6;--text:#1a1916;--muted:#6b6860;
+    --accent:#1a5c3a;--accent-l:#e8f3ed;--danger:#b83232;--danger-l:#fdf0f0;
+    --warn:#8a6000;--warn-l:#fef9ec;--gray:#9a9790;--gray-l:#f0efe9;
+    --blue:#1e4d8c;--blue-l:#edf2fb;--r:10px;
+    --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+  /* ── LOGIN SCREEN ── */
+  #login-screen{
+    display:flex;flex-direction:column;min-height:100vh;
+  }
+  #login-screen .hdr{background:var(--accent);padding:.85rem 1.1rem;display:flex;align-items:center;gap:10px;}
+  #login-screen .hdr-logo{width:34px;height:34px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+  #login-screen .hdr h1{font-size:14px;font-weight:600;color:#fff;}
+  #login-screen .hdr p{font-size:11px;color:rgba(255,255,255,.65);margin-top:1px;}
+  .login-body{flex:1;display:flex;align-items:center;justify-content:center;padding:2rem 1rem;}
+  .login-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem 1.6rem;box-shadow:var(--shadow);width:100%;max-width:420px;}
+  .login-card h2{font-size:16px;font-weight:600;margin-bottom:1.2rem;}
+  .login-ff{margin-bottom:.9rem;}
+  .login-ff label{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em;}
+  .login-ff input{width:100%;padding:9px 11px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:'IBM Plex Sans',sans-serif;-webkit-appearance:none;}
+  .login-ff input:focus{outline:none;border-color:var(--accent);}
+  .btn-login{width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;background:var(--blue);color:#fff;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:7px;}
+  .btn-login:active{opacity:.85;}
+  .btn-login:disabled{opacity:.55;cursor:not-allowed;}
+  .login-status{padding:9px 10px;border-radius:8px;border:1px solid var(--border);background:var(--gray-l);font-size:12px;line-height:1.5;margin-top:.8rem;}
+  .login-status.err{background:var(--danger-l);border-color:#efc7c7;color:var(--danger);}
+  .login-status.ok{background:var(--accent-l);border-color:#bfd7ca;color:var(--accent);}
+
+  /* ── APP (hidden until login) ── */
+  #app-screen{display:none;}
+
+  /* ── REST OF APP STYLES (unchanged) ── */
+  .hdr{background:var(--accent);padding:.85rem 1.1rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;}
+  .hdr-logo{width:34px;height:34px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+  .hdr h1{font-size:14px;font-weight:600;color:#fff;}
+  .hdr p{font-size:11px;color:rgba(255,255,255,.65);margin-top:1px;}
+  .hdr-logout{margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:500;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;}
+  .hdr-logout:hover{background:rgba(255,255,255,.25);}
+  .wrap{padding:1.1rem;max-width:680px;margin:0 auto;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;box-shadow:var(--shadow);margin-top:1.1rem;}
+  .card-title{font-size:14px;font-weight:600;margin-bottom:.85rem;}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+  .ff label{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em;}
+  .ff input,.ff select,.ff textarea{width:100%;padding:8px 10px;font-size:13px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-family:'IBM Plex Sans',sans-serif;-webkit-appearance:none;}
+  .ff textarea{min-height:70px;resize:vertical;}
+  .full{grid-column:1/-1;}
+  .btn{width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;}
+  .btn:active{opacity:.85;}
+  .btn-green{background:var(--accent);color:#fff;margin-top:.85rem;}
+  .btn-excel{background:#217346;color:#fff;}
+  .btn-pdf{background:#9b2226;color:#fff;}
+  .btn-blue{background:var(--blue);color:#fff;}
+  .btn-back{background:var(--gray-l);color:var(--muted);border:1px solid var(--border);}
+  .btn-stack{display:flex;flex-direction:column;gap:8px;margin-top:.85rem;}
+  .mini{font-size:11px;color:var(--muted);line-height:1.5;}
+  .status-box{padding:9px 10px;border-radius:8px;border:1px solid var(--border);background:var(--gray-l);font-size:12px;line-height:1.5;margin-top:.75rem;}
+  .status-box.ok{background:var(--accent-l);border-color:#bfd7ca;color:var(--accent);}
+  .status-box.err{background:var(--danger-l);border-color:#efc7c7;color:var(--danger);}
+  .prog-wrap{margin-bottom:1.1rem;}
+  .prog-top{display:flex;justify-content:space-between;margin-bottom:5px;}
+  .prog-top span{font-size:12px;color:var(--muted);}
+  .prog-top strong{font-size:12px;font-weight:600;font-family:'IBM Plex Mono';color:var(--accent);}
+  .prog-bar{height:5px;background:var(--border);border-radius:3px;}
+  .prog-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s;}
+  .pc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:.9rem;}
+  .pc.active{border:1.5px solid var(--accent);}
+  .pc.ok{border-left:4px solid var(--accent);}
+  .pc.ko{border-left:4px solid var(--danger);}
+  .pc.na{border-left:4px solid var(--gray);}
+  .pc-hdr{padding:.65rem .9rem;background:var(--gray-l);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+  .pc-num{font-family:'IBM Plex Mono';font-size:11px;color:var(--muted);}
+  .tag{font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.03em;}
+  .tag-fab{background:var(--blue-l);color:var(--blue);}
+  .tag-gest{background:var(--accent-l);color:var(--accent);}
+  .tag-freq{background:var(--warn-l);color:var(--warn);}
+  .tag-dur{background:var(--gray-l);color:var(--muted);}
+  .pc-body{padding:.9rem;}
+  .pc-fn{font-size:13px;font-weight:600;margin-bottom:5px;}
+  .pc-como{font-size:12px;color:var(--muted);line-height:1.6;padding:7px 9px;background:var(--gray-l);border-radius:6px;border-left:3px solid var(--border);margin-bottom:10px;}
+  .pc-como strong{color:var(--text);display:block;margin-bottom:2px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;}
+  .rrow{display:flex;gap:5px;margin-bottom:9px;}
+  .rbtn{flex:1;padding:10px 4px;border-radius:7px;border:1.5px solid var(--border);cursor:pointer;font-size:12px;font-weight:500;font-family:'IBM Plex Sans',sans-serif;background:var(--surface);color:var(--muted);text-align:center;}
+  .rbtn-ok.sel{background:var(--accent-l);border-color:var(--accent);color:var(--accent);}
+  .rbtn-ko.sel{background:var(--danger-l);border-color:var(--danger);color:var(--danger);}
+  .rbtn-na.sel{background:var(--gray-l);border-color:var(--gray);color:var(--gray);}
+  .obs{width:100%;padding:8px 9px;font-size:12px;line-height:1.6;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);resize:vertical;min-height:54px;font-family:'IBM Plex Sans',sans-serif;margin-bottom:8px;}
+  .media-section{background:var(--gray-l);border-radius:8px;padding:9px;margin-bottom:4px;}
+  .media-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px;}
+  .media-btns{display:flex;gap:6px;flex-wrap:wrap;}
+  .mbtn{display:inline-flex;align-items:center;gap:5px;padding:8px 12px;border-radius:7px;border:1.5px dashed var(--border);cursor:pointer;font-size:12px;font-weight:500;color:var(--text);background:var(--surface);font-family:'IBM Plex Sans',sans-serif;}
+  .mbtn:active{background:var(--gray-l);}
+  .mbtn-rec{border-color:var(--danger);color:var(--danger);}
+  .mbtn-rec.recording{background:var(--danger);color:#fff;border-style:solid;animation:pulse 1s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.7;}}
+  .foto-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;}
+  .fthumb{position:relative;width:68px;height:68px;border-radius:6px;overflow:hidden;border:1px solid var(--border);}
+  .fthumb img{width:100%;height:100%;object-fit:cover;}
+  .fdel{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;border:none;cursor:pointer;font-size:9px;display:flex;align-items:center;justify-content:center;}
+  .audio-list{margin-top:7px;display:flex;flex-direction:column;gap:5px;}
+  .audio-item{display:flex;align-items:center;gap:7px;background:var(--surface);border-radius:6px;padding:6px 9px;border:1px solid var(--border);}
+  .audio-item audio{flex:1;height:32px;}
+  .audio-del{background:none;border:none;color:var(--danger);cursor:pointer;font-size:13px;padding:2px 5px;}
+  .nav-row{display:flex;gap:8px;align-items:center;margin-top:.5rem;flex-wrap:wrap;}
+  .nbtn{padding:10px 16px;border-radius:8px;border:1px solid var(--border);cursor:pointer;font-size:13px;font-weight:500;font-family:'IBM Plex Sans',sans-serif;background:var(--surface);color:var(--text);}
+  .nbtn-primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .nbtn-sm{padding:10px 11px;font-size:12px;margin-left:auto;}
+  .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:1rem 0;}
+  .stile{border-radius:8px;padding:13px;text-align:center;}
+  .stile.ok{background:var(--accent-l);}.stile.ko{background:var(--danger-l);}.stile.na{background:var(--gray-l);}
+  .snum{font-size:28px;font-weight:600;font-family:'IBM Plex Mono';}
+  .stile.ok .snum{color:var(--accent);}.stile.ko .snum{color:var(--danger);}.stile.na .snum{color:var(--gray);}
+  .slbl{font-size:11px;color:var(--muted);margin-top:2px;}
+  .ko-item{padding:8px 9px;background:var(--danger-l);border-radius:6px;border-left:3px solid var(--danger);margin-bottom:5px;font-size:12px;color:var(--danger);}
+  .divider{height:1px;background:var(--border);margin:.9rem 0;}
+  .exp-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px;}
+  .hidden{display:none!important;}
+  @media print{
+    .hdr,.nav-row,.btn,.media-section,.fdel,.audio-del{display:none!important;}
+    body{background:#fff;}
+    .pc{box-shadow:none;break-inside:avoid;}
+  }
+</style>
 </head>
 <body>
+
+<!-- ═══════════════════════════════════════════
+     PANTALLA DE LOGIN
+════════════════════════════════════════════ -->
+<div id="login-screen">
   <div class="hdr">
     <div class="hdr-logo">🔍</div>
     <div><h1>Asistente de Auditoría</h1><p>Visores de tortillas — Delibreads</p></div>
   </div>
-  <div class="wrap">
-    <!-- Formulario de inicio de sesión -->
-    <div id="login-panel" class="card">
-      <div class="card-title">Inicio de sesión</div>
-      <div class="fgrid">
-        <div class="ff full"><label>Correo electrónico</label><input type="email" id="email" placeholder="Introduce tu correo electrónico" required/></div>
-        <div class="ff full"><label>Contraseña</label><input type="password" id="password" placeholder="Introduce tu contraseña" required/></div>
+  <div class="login-body">
+    <div class="login-card">
+      <h2>Inicio de sesión</h2>
+      <div class="login-ff">
+        <label>Correo electrónico</label>
+        <input type="email" id="login-email" placeholder="tu@email.com" autocomplete="email"/>
       </div>
-      <button class="btn btn-blue" onclick="login()">Iniciar sesión</button>
-      <div class="status-box" id="login-status">No estás logueado. Ingresa tus datos.</div>
+      <div class="login-ff">
+        <label>Contraseña</label>
+        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password"/>
+      </div>
+      <button class="btn-login" id="btn-login" onclick="doLogin()">Iniciar sesión</button>
+      <div class="login-status" id="login-status">No estás logueado. Ingresa tus datos.</div>
     </div>
+  </div>
+</div>
 
-    <!-- Conexión a Supabase -->
-    <div id="supabase-panel" class="card hidden">
+<!-- ═══════════════════════════════════════════
+     APLICACIÓN PRINCIPAL (oculta hasta login)
+════════════════════════════════════════════ -->
+<div id="app-screen">
+  <div class="hdr">
+    <div class="hdr-logo">🔍</div>
+    <div><h1>Asistente de Auditoría</h1><p>Visores de tortillas — Delibreads</p></div>
+    <button class="hdr-logout" onclick="doLogout()">Cerrar sesión</button>
+  </div>
+  <div class="wrap">
+    <div class="card">
       <div class="card-title">Conexión Supabase</div>
       <div class="fgrid">
         <div class="ff full"><label>Supabase URL</label><input type="text" id="supabase-url" placeholder="https://xxxx.supabase.co"/></div>
@@ -70,28 +180,29 @@
       </div>
       <button class="btn btn-blue" onclick="saveSupabaseSettings()">Guardar conexión</button>
       <div class="status-box" id="cloud-status">Sin conectar. Guarda la URL y la anon key para poder subir fotos, audios y la auditoría.</div>
+      <p class="mini" style="margin-top:.65rem;">Esta configuración se guarda en este navegador. La auditoría y las evidencias se suben a Supabase cuando pulses <strong>Guardar auditoría en nube</strong>.</p>
     </div>
 
-    <!-- Datos de la auditoría -->
-    <div id="setup-panel" class="card hidden">
-      <div class="card-title">Datos de la auditoría</div>
-      <div class="fgrid">
-        <div class="ff"><label>Fecha</label><input type="date" id="inp-fecha" required/></div>
-        <div class="ff"><label>Línea auditada</label><input type="text" id="inp-linea" placeholder="Ej: Línea 1" required/></div>
-        <div class="ff"><label>Auditor</label><input type="text" id="inp-auditor" placeholder="Tu nombre" required/></div>
-        <div class="ff"><label>Semana del mes</label>
-          <select id="inp-semana">
-            <option value="1">Semana 1 — semanales + mensuales</option>
-            <option value="2">Semana 2 — solo semanales</option>
-            <option value="3">Semana 3 — semanales + quincenales</option>
-            <option value="4">Semana 4 — solo semanales</option>
-          </select>
+    <div id="setup-panel">
+      <div class="card">
+        <div class="card-title">Datos de la auditoría</div>
+        <div class="fgrid">
+          <div class="ff"><label>Fecha</label><input type="date" id="inp-fecha"/></div>
+          <div class="ff"><label>Línea auditada</label><input type="text" id="inp-linea" placeholder="Ej: Línea 1"/></div>
+          <div class="ff"><label>Auditor</label><input type="text" id="inp-auditor" placeholder="Tu nombre"/></div>
+          <div class="ff"><label>Semana del mes</label>
+            <select id="inp-semana">
+              <option value="1">Semana 1 — semanales + mensuales</option>
+              <option value="2">Semana 2 — solo semanales</option>
+              <option value="3">Semana 3 — semanales + quincenales</option>
+              <option value="4">Semana 4 — solo semanales</option>
+            </select>
+          </div>
         </div>
+        <button class="btn btn-green" onclick="startAudit()">Iniciar auditoría →</button>
       </div>
-      <button class="btn btn-green" onclick="startAudit()">Iniciar auditoría →</button>
     </div>
 
-    <!-- Auditar panel (Oculto) -->
     <div id="audit-panel" class="hidden">
       <div class="prog-wrap" style="margin-top:1.1rem;">
         <div class="prog-top">
@@ -108,7 +219,6 @@
       </div>
     </div>
 
-    <!-- Resumen de auditoría -->
     <div id="summary-panel" class="hidden">
       <div class="card">
         <div class="card-title" id="sum-title">Resumen de auditoría</div>
@@ -125,86 +235,502 @@
           <button class="btn btn-excel" onclick="exportExcel()">⬇ Descargar Excel (.xlsx)</button>
           <button class="btn btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
         </div>
+        <div class="status-box" id="save-status">Todavía no se ha guardado ninguna auditoría en Supabase.</div>
+        <div class="divider"></div>
+        <button class="btn btn-back" onclick="backToAudit()">← Volver a revisar puntos</button>
+        <button class="btn" style="margin-top:.6rem;background:#fff3cd;color:#856404;border-color:#ffc107;border:1px solid #ffc107;" onclick="nuevaAuditoria()">🆕 Nueva auditoría (limpia el borrador actual)</button>
       </div>
     </div>
   </div>
+</div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    let userAuthenticated = false;
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ═══════════════════════════════════════════════════════
+//  CONFIGURACIÓN — Pon aquí tu URL y anon key de Supabase
+//  (las mismas que usas para la auditoría)
+// ═══════════════════════════════════════════════════════
+const SUPABASE_URL  = 'https://swpotikeycxmzskaldfe.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_uhNeT0cz-94KsBgUqGTI6w_zEO3fPvL';
 
-    // Login function
-    async function login() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+// ───────────────────────────────────────────────────────
+//  LOGIN / LOGOUT
+// ───────────────────────────────────────────────────────
+let authClient = null;
 
-      const { user, error } = await supabase.auth.signInWithPassword({ email, password });
-      
-      if (error) {
-        document.getElementById('login-status').textContent = 'Error al iniciar sesión: ' + error.message;
-        return;
+function getAuthClient(){
+  if(!authClient) authClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+  return authClient;
+}
+
+async function doLogin(){
+  const email    = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const btn      = document.getElementById('btn-login');
+  const status   = document.getElementById('login-status');
+
+  if(!email || !password){
+    setLoginStatus('Escribe tu correo y contraseña.','err');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Entrando…';
+  setLoginStatus('Verificando credenciales…');
+
+  try{
+    const client = getAuthClient();
+    const { data, error } = await client.auth.signInWithPassword({ email, password });
+
+    if(error) throw error;
+
+    // Login correcto → mostrar la app
+    setLoginStatus('¡Acceso correcto! Cargando…','ok');
+    setTimeout(()=>{
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app-screen').style.display   = 'block';
+      initApp();
+    }, 600);
+
+  }catch(err){
+    let msg = err.message || 'Error desconocido';
+    // Mensajes más claros en español
+    if(msg.includes('Invalid login credentials'))  msg = 'Correo o contraseña incorrectos.';
+    if(msg.includes('Email not confirmed'))         msg = 'Debes confirmar tu correo antes de entrar. Revisa tu bandeja de entrada.';
+    if(msg.includes('User not found'))              msg = 'Este usuario no existe.';
+    setLoginStatus(msg,'err');
+    btn.disabled = false;
+    btn.textContent = 'Iniciar sesión';
+  }
+}
+
+async function doLogout(){
+  const client = getAuthClient();
+  await client.auth.signOut();
+  document.getElementById('app-screen').style.display   = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-password').value = '';
+  setLoginStatus('Has cerrado sesión.');
+}
+
+function setLoginStatus(msg, type=''){
+  const el = document.getElementById('login-status');
+  el.className = 'login-status' + (type ? ' '+type : '');
+  el.textContent = msg;
+}
+
+// Permitir Enter en el campo contraseña
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.getElementById('login-password').addEventListener('keydown', e=>{
+    if(e.key === 'Enter') doLogin();
+  });
+  document.getElementById('login-email').addEventListener('keydown', e=>{
+    if(e.key === 'Enter') document.getElementById('login-password').focus();
+  });
+
+  // Comprobar si ya hay sesión activa (si el usuario ya había entrado antes en este navegador)
+  checkExistingSession();
+});
+
+async function checkExistingSession(){
+  try{
+    const client = getAuthClient();
+    const { data: { session } } = await client.auth.getSession();
+    if(session){
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app-screen').style.display   = 'block';
+      initApp();
+    }
+  }catch(e){ /* sin sesión, mostramos el login normalmente */ }
+}
+
+// ═══════════════════════════════════════════════════════
+//  APP PRINCIPAL (se inicializa después del login)
+// ═══════════════════════════════════════════════════════
+function initApp(){
+  document.getElementById('inp-fecha').value = new Date().toISOString().split('T')[0];
+  loadSupabaseSettings();
+  loadDraft();
+  initSupabaseClient();
+}
+
+// ───────────────────────────────────────────────────────
+//  DATOS DE AUDITORÍA (sin cambios)
+// ───────────────────────────────────────────────────────
+const PUNTOS=[
+  {id:1,bloque:'Fabricar',funcion:'Asegurar calidad de producto',compromiso:'Verificar si los visores de tortillas están funcionando correctamente, realizando pruebas periódicas y asegurando que el sistema detecte y rechace las piezas defectuosas.',como:'Falso rechazo: hacer un muestreo del rechazo, durante 10 minutos, para comprobar si las tortillas han sido correctamente expulsadas en una de las líneas. Comprobar que en la aplicación aparecen todos los defectos que esa tortilla tiene.',duracion:30,frecuencia:'Semanal',semanas:[1,2,3,4]},
+  {id:2,bloque:'Fabricar',funcion:'Asegurar calidad de producto',compromiso:'Verificar si los visores de tortillas están funcionando correctamente, realizando pruebas periódicas y asegurando que el sistema detecte y rechace las piezas defectuosas.',como:'Verificación de expulsión: pasar una mancha azul y una negra (rotulador ~5mm²) tanto para la cámara superior como la inferior, por todos los carriles. Comprobar en una de las líneas.',duracion:20,frecuencia:'Semanal',semanas:[1,2,3,4]},
+  {id:3,bloque:'Fabricar',funcion:'Asegurar calidad de producto',compromiso:'Verificar si los visores de tortillas están funcionando correctamente, realizando pruebas periódicas y asegurando que el sistema detecte y rechace las piezas defectuosas.',como:'Verificación de expulsión: coger, durante dos minutos, montones de tortillas que salen de la contadora y comprobar que no hay franjas crudas. Comprobar en una de las líneas.',duracion:10,frecuencia:'Semanal',semanas:[1,2,3,4]},
+  {id:4,bloque:'Fabricar',funcion:'Asegurar calidad de producto',compromiso:'Verificar si los visores de tortillas están funcionando correctamente, realizando pruebas periódicas y asegurando que el sistema detecte y rechace las piezas defectuosas.',como:'Verificación de expulsión: comprobar que se expulsan correctamente tortillas KO de tipo: churro, hamburguesa, doble, pequeña, grande, borde recto, irregularidad, agujero y translucidez total. Comprobar en una de las líneas.',duracion:20,frecuencia:'Mensual',semanas:[1]},
+  {id:5,bloque:'Fabricar',funcion:'Asegurar calidad de producto',compromiso:'Realizar el seguimiento de las incidencias y mejoras de los visores, registrando, monitorizando y actualizando su estado, colaborando con los equipos correspondientes para asegurar su pronta resolución y el cumplimiento de los plazos establecidos.',como:'Seleccionar tres JE y hacer preguntas sobre un método, comprobando así su correcto entendimiento.',duracion:30,frecuencia:'Semanal',semanas:[1,2,3,4]},
+  {id:6,bloque:'Fabricar',funcion:'Asegurar calidad de producto',compromiso:'Realizar el seguimiento de las incidencias y mejoras de los visores, registrando, monitorizando y actualizando su estado, colaborando con los equipos correspondientes para asegurar su pronta resolución y el cumplimiento de los plazos establecidos.',como:'Provocar las incidencias o mejoras resueltas la semana anterior en la línea donde no ha sido expulsada.',duracion:60,frecuencia:'Quincenal',semanas:[1,3]},
+  {id:7,bloque:'Fabricar',funcion:'Asegurar calidad de producto',compromiso:'Realizar el seguimiento de las incidencias y mejoras de los visores, registrando, monitorizando y actualizando su estado, colaborando con los equipos correspondientes para asegurar su pronta resolución y el cumplimiento de los plazos establecibles.',como:'Provocar los inputs de calidad o internos del último mes y registrar su estado en la línea donde no ha sido expulsada.',duracion:60,frecuencia:'Mensual',semanas:[1]},
+  {id:8,bloque:'Fabricar',funcion:'Ajustar nivel de rechazo a nivel de tolerancias, calibrando los parámetros del sistema para garantizar que las tolerancias de aceptación y rechazo estén correctamente configuradas, reduciendo al mínimo los rechazos innecesarios sin comprometer la calidad del producto.',compromiso:'Ajustar nivel de rechazo a nivel de tolerancias, calibrando los parámetros del sistema para garantizar que las tolerancias de aceptación y rechazo estén correctamente configuradas, reduciendo al mínimo los rechazos innecesarios sin comprometer la calidad del producto.',como:'Ir al visor y ver que las tolerancias son las definidas por AO en una de las líneas.',duracion:10,frecuencia:'Mensual',semanas:[1]},
+  {id:9,bloque:'Gestionar equipos',funcion:'Formación y polivalencia',compromiso:'Realizar formaciones/informaciones de funcionalidades de los visores, diseñando y llevando a cabo sesiones formativas para capacitar a los usuarios en el uso y aprovechamiento de las funcionalidades, asegurando una correcta implementación y comprensión.',como:'Comprobar que no existe ningún JE (nuevo o antiguo) que no haya recibido la información. Preguntar a JT-JE que saben interpretar correctamente los problemas/pantallas del visor.',duracion:15,frecuencia:'Quincenal',semanas:[1,3]},
+  {id:10,bloque:'Gestionar equipos',funcion:'Formación y polivalencia',compromiso:'Realizar formaciones/informaciones de funcionalidades de los visores, diseñando y llevando a cabo sesiones formativas para capacitar a los usuarios en el uso y aprovechamiento de las funcionalidades, asegurando una correcta implementación y comprensión.',como:'Comprobar que los manuales están actualizados.',duracion:30,frecuencia:'Mensual',semanas:[1]}
+];
+
+const DRAFT_KEY='auditoria_visores_draft_v2';
+const SUPABASE_KEY='auditoria_visores_supabase_cfg_v1';
+let results={}, currentIdx=0, viewAll=false, semanaActual=1, puntosActivos=[], auditInfo={};
+let mediaRecorders={}, audioChunks={}, recordingId=null;
+let supabaseClient=null;
+let saveInProgress=false;
+
+function getISOWeek(d){
+  const dt=new Date(d); dt.setHours(0,0,0,0);
+  dt.setDate(dt.getDate()+4-(dt.getDay()||7));
+  const y=new Date(dt.getFullYear(),0,1);
+  return Math.ceil((((dt-y)/86400000)+1)/7);
+}
+function safeLinea(){ return (auditInfo.linea || 'sin-linea').toString().trim().replace(/\s+/g,'-').replace(/[^a-zA-Z0-9_-]/g,'').toLowerCase() || 'sin-linea'; }
+function uid(){ return Math.random().toString(36).slice(2,10); }
+function setStatus(elId,msg,type=''){ const el=document.getElementById(elId); if(!el)return; el.className='status-box'+(type?` ${type}`:''); el.textContent=msg; }
+
+function getSupabaseSettings(){
+  return {
+    url:document.getElementById('supabase-url').value.trim(),
+    anonKey:document.getElementById('supabase-anon-key').value.trim(),
+    bucket:(document.getElementById('supabase-bucket').value.trim()||'auditoria-evidencias'),
+    table:(document.getElementById('supabase-table').value.trim()||'auditorias_visores')
+  };
+}
+function saveSupabaseSettings(){
+  const cfg=getSupabaseSettings();
+  if(!cfg.url || !cfg.anonKey){ setStatus('cloud-status','Falta la URL o la anon key de Supabase.','err'); return; }
+  localStorage.setItem(SUPABASE_KEY, JSON.stringify(cfg));
+  initSupabaseClient();
+}
+function loadSupabaseSettings(){
+  const raw=localStorage.getItem(SUPABASE_KEY);
+  if(!raw)return;
+  try{
+    const cfg=JSON.parse(raw);
+    document.getElementById('supabase-url').value=cfg.url||'';
+    document.getElementById('supabase-anon-key').value=cfg.anonKey||'';
+    document.getElementById('supabase-bucket').value=cfg.bucket||'auditoria-evidencias';
+    document.getElementById('supabase-table').value=cfg.table||'auditorias_visores';
+  }catch(e){ console.warn('No se pudo cargar la configuración de Supabase',e); }
+}
+function initSupabaseClient(){
+  const cfg=getSupabaseSettings();
+  if(!cfg.url || !cfg.anonKey){ supabaseClient=null; setStatus('cloud-status','Sin conectar. Guarda la URL y la anon key para poder subir fotos, audios y la auditoría.'); return null; }
+  try{
+    supabaseClient=window.supabase.createClient(cfg.url, cfg.anonKey);
+    setStatus('cloud-status',`Configuración guardada. Bucket: ${cfg.bucket} · Tabla: ${cfg.table}`,'ok');
+    return supabaseClient;
+  }catch(err){
+    supabaseClient=null;
+    setStatus('cloud-status','No se pudo crear la conexión con Supabase: '+err.message,'err');
+    return null;
+  }
+}
+
+function serializeResultsForDraft(){
+  const clean={};
+  Object.keys(results).forEach(id=>{
+    const r=results[id]||{};
+    clean[id]={
+      estado:r.estado||'',
+      obs:r.obs||'',
+      fotos:(r.fotos||[]).map(f=>({name:f.name,url:f.url||'',storagePath:f.storagePath||'',uploaded:!!f.uploaded})),
+      audios:(r.audios||[]).map(a=>({name:a.name,url:a.url||'',storagePath:a.storagePath||'',uploaded:!!a.uploaded}))
+    };
+  });
+  return clean;
+}
+function persistDraft(){
+  const payload={
+    auditInfo:{
+      fecha:document.getElementById('inp-fecha').value||'',
+      linea:document.getElementById('inp-linea').value||'',
+      auditor:document.getElementById('inp-auditor').value||'',
+      semana:document.getElementById('inp-semana').value||'1'
+    },
+    results:serializeResultsForDraft(),
+    currentIdx,viewAll
+  };
+  localStorage.setItem(DRAFT_KEY, JSON.stringify(payload));
+}
+function loadDraft(){
+  const raw=localStorage.getItem(DRAFT_KEY);
+  if(!raw)return;
+  try{
+    const draft=JSON.parse(raw);
+    if(draft.auditInfo){
+      document.getElementById('inp-fecha').value=draft.auditInfo.fecha||new Date().toISOString().split('T')[0];
+      document.getElementById('inp-linea').value=draft.auditInfo.linea||'';
+      document.getElementById('inp-auditor').value=draft.auditInfo.auditor||'';
+      document.getElementById('inp-semana').value=draft.auditInfo.semana||'1';
+    }
+    results=draft.results||{};
+    currentIdx=Number.isInteger(draft.currentIdx)?draft.currentIdx:0;
+    viewAll=!!draft.viewAll;
+  }catch(e){ console.warn('No se pudo cargar el borrador',e); }
+}
+
+function startAudit(){
+  auditInfo={
+    fecha:document.getElementById('inp-fecha').value||new Date().toISOString().split('T')[0],
+    linea:document.getElementById('inp-linea').value||'—',
+    auditor:document.getElementById('inp-auditor').value||'—'
+  };
+  semanaActual=parseInt(document.getElementById('inp-semana').value,10);
+  puntosActivos=PUNTOS.filter(p=>p.semanas.includes(semanaActual));
+  document.getElementById('setup-panel').classList.add('hidden');
+  document.getElementById('audit-panel').classList.remove('hidden');
+  if(currentIdx>=puntosActivos.length)currentIdx=0;
+  if(viewAll){ reRenderAll(); document.getElementById('nav-row').classList.add('hidden'); }
+  else renderCurrent();
+  persistDraft();
+}
+
+function ensureResult(id){ if(!results[id])results[id]={estado:'',obs:'',fotos:[],audios:[]}; }
+
+function buildPunto(p, idx, isActive){
+  const r=results[p.id]||{};
+  const estado=r.estado||'';
+  const obs=r.obs||'';
+  const fotos=r.fotos||[];
+  const audios=r.audios||[];
+  const cls=estado==='OK'?'ok':estado==='KO'?'ko':estado==='N/A'?'na':isActive?'active':'';
+  const tb=p.bloque==='Fabricar'?'tag-fab':'tag-gest';
+  const fotosHTML=fotos.length?`<div class="foto-grid">${fotos.map((f,fi)=>`<div class="fthumb"><img src="${f.preview || f.url}"/><button class="fdel" onclick="delFoto(${p.id},${fi})">✕</button></div>`).join('')}</div>`:'';
+  const audiosHTML=audios.length?`<div class="audio-list">${audios.map((a,ai)=>`<div class="audio-item"><audio controls src="${a.preview || a.url}"></audio><button class="audio-del" onclick="delAudio(${p.id},${ai})">🗑</button></div>`).join('')}</div>`:'';
+  const isRec=recordingId===p.id;
+  return `<div class="pc ${cls}" id="pc-${p.id}">
+    <div class="pc-hdr">
+      <span class="pc-num">Punto ${idx+1}/${puntosActivos.length}</span>
+      <span class="tag ${tb}">${p.bloque}</span>
+      <span class="tag tag-freq">${p.frecuencia}</span>
+      <span class="tag tag-dur">${p.duracion} min</span>
+    </div>
+    <div class="pc-body">
+      <div class="pc-fn">${p.funcion}</div>
+      <div class="pc-como"><strong>Cómo verificar</strong>${p.como}</div>
+      <div class="rrow">
+        <button class="rbtn rbtn-ok ${estado==='OK'?'sel':''}" onclick="setEstado(${p.id},'OK')">✓ Correcto</button>
+        <button class="rbtn rbtn-ko ${estado==='KO'?'sel':''}" onclick="setEstado(${p.id},'KO')">✗ Incidencia</button>
+        <button class="rbtn rbtn-na ${estado==='N/A'?'sel':''}" onclick="setEstado(${p.id},'N/A')">— No aplica</button>
+      </div>
+      <textarea class="obs" id="obs-${p.id}" placeholder="Observaciones: qué has visto, tiempos reales, diferencias..." onchange="saveObs(${p.id})">${obs}</textarea>
+      <div class="media-section">
+        <div class="media-title">📎 Evidencias</div>
+        <div class="media-btns">
+          <label class="mbtn" for="fi-${p.id}">📷 Foto<input type="file" id="fi-${p.id}" accept="image/*" capture="environment" style="display:none" onchange="addFoto(${p.id},this)"/></label>
+          <label class="mbtn" for="fg-${p.id}">🖼 Galería<input type="file" id="fg-${p.id}" accept="image/*" multiple style="display:none" onchange="addFotoGaleria(${p.id},this)"/></label>
+          <button class="mbtn mbtn-rec ${isRec?'recording':''}" onclick="toggleRecord(${p.id})">🎙 ${isRec?'Parar':'Grabar audio'}</button>
+          <label class="mbtn" for="au-${p.id}">📂 Audio<input type="file" id="au-${p.id}" accept="audio/*" multiple style="display:none" onchange="addAudioFile(${p.id},this)"/></label>
+        </div>
+        ${fotosHTML}
+        ${audiosHTML}
+      </div>
+    </div>
+  </div>`;
+}
+
+function addFoto(id, input){ if(!input.files||!input.files[0])return; readAndQueueFoto(id, input.files[0]); input.value=''; }
+function addFotoGaleria(id, input){ if(!input.files||!input.files.length)return; Array.from(input.files).forEach(f=>readAndQueueFoto(id,f)); input.value=''; }
+function readAndQueueFoto(id, file){
+  ensureResult(id);
+  results[id].fotos.push({name:file.name||`foto_${Date.now()}.jpg`, file, preview:URL.createObjectURL(file), uploaded:false, url:'', storagePath:''});
+  persistDraft();
+  viewAll?reRenderAll():renderCurrent();
+}
+function delFoto(id,fi){ ensureResult(id); const item=results[id].fotos[fi]; if(item?.preview)URL.revokeObjectURL(item.preview); results[id].fotos.splice(fi,1); persistDraft(); viewAll?reRenderAll():renderCurrent(); }
+
+async function toggleRecord(id){
+  if(recordingId===id){ if(mediaRecorders[id]&&mediaRecorders[id].state!=='inactive')mediaRecorders[id].stop(); return; }
+  if(recordingId!==null&&mediaRecorders[recordingId])mediaRecorders[recordingId].stop();
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    audioChunks[id]=[];
+    const mr=new MediaRecorder(stream);
+    mediaRecorders[id]=mr;
+    recordingId=id;
+    mr.ondataavailable=e=>{ if(e.data.size>0)audioChunks[id].push(e.data); };
+    mr.onstop=()=>{
+      const blob=new Blob(audioChunks[id],{type:'audio/webm'});
+      ensureResult(id);
+      const filename=`audio_p${id}_${Date.now()}.webm`;
+      results[id].audios.push({name:filename, file:new File([blob], filename, {type:'audio/webm'}), preview:URL.createObjectURL(blob), uploaded:false, url:'', storagePath:''});
+      recordingId=null;
+      stream.getTracks().forEach(t=>t.stop());
+      persistDraft();
+      viewAll?reRenderAll():renderCurrent();
+    };
+    mr.start();
+    viewAll?reRenderAll():renderCurrent();
+  }catch(err){
+    alert('No se pudo acceder al micrófono. Asegúrate de dar permiso al navegador.\n\nError: '+err.message);
+    recordingId=null;
+  }
+}
+function addAudioFile(id, input){
+  if(!input.files||!input.files.length)return;
+  ensureResult(id);
+  Array.from(input.files).forEach(file=>results[id].audios.push({name:file.name, file, preview:URL.createObjectURL(file), uploaded:false, url:'', storagePath:''}));
+  input.value='';
+  persistDraft();
+  viewAll?reRenderAll():renderCurrent();
+}
+function delAudio(id,ai){ ensureResult(id); const item=results[id].audios[ai]; if(item?.preview)URL.revokeObjectURL(item.preview); results[id].audios.splice(ai,1); persistDraft(); viewAll?reRenderAll():renderCurrent(); }
+
+function setEstado(id,estado){ ensureResult(id); results[id].estado=estado; const obs=document.getElementById('obs-'+id); if(obs)results[id].obs=obs.value; persistDraft(); viewAll?reRenderAll():renderCurrent(); updateProgress(); }
+function saveObs(id){ ensureResult(id); const o=document.getElementById('obs-'+id); if(o)results[id].obs=o.value; persistDraft(); }
+function renderCurrent(){ viewAll=false; document.getElementById('puntos-container').innerHTML=buildPunto(puntosActivos[currentIdx],currentIdx,true); document.getElementById('btn-prev').style.display=currentIdx===0?'none':''; document.getElementById('btn-next').textContent=currentIdx===puntosActivos.length-1?'Ver resumen →':'Siguiente →'; document.getElementById('nav-row').classList.remove('hidden'); updateProgress(); }
+function reRenderAll(){ document.getElementById('puntos-container').innerHTML=puntosActivos.map((p,i)=>buildPunto(p,i,false)).join(''); updateProgress(); }
+function showAll(){ viewAll=true; reRenderAll(); document.getElementById('nav-row').classList.add('hidden'); persistDraft(); }
+function navigate(dir){ saveObs(puntosActivos[currentIdx].id); if(dir===1&&currentIdx===puntosActivos.length-1){showSummary(); return;} currentIdx=Math.max(0,Math.min(puntosActivos.length-1,currentIdx+dir)); persistDraft(); renderCurrent(); }
+function updateProgress(){ const done=puntosActivos.filter(p=>results[p.id]?.estado).length; const pct=puntosActivos.length?Math.round(done/puntosActivos.length*100):0; document.getElementById('prog-fill').style.width=pct+'%'; document.getElementById('prog-label').textContent=`${done} de ${puntosActivos.length} completados`; document.getElementById('prog-pct').textContent=pct+'%'; }
+function showSummary(){ if(puntosActivos[currentIdx])saveObs(puntosActivos[currentIdx].id); document.getElementById('audit-panel').classList.add('hidden'); document.getElementById('summary-panel').classList.remove('hidden'); const week=getISOWeek(auditInfo.fecha); const year=new Date(auditInfo.fecha).getFullYear(); document.getElementById('sum-title').textContent=`Auditoría · ${auditInfo.linea} · Semana ${week}/${year}`; const ok=puntosActivos.filter(p=>results[p.id]?.estado==='OK').length; const ko=puntosActivos.filter(p=>results[p.id]?.estado==='KO').length; const na=puntosActivos.filter(p=>results[p.id]?.estado==='N/A').length; document.getElementById('s-ok').textContent=ok; document.getElementById('s-ko').textContent=ko; document.getElementById('s-na').textContent=na; const koItems=puntosActivos.filter(p=>results[p.id]?.estado==='KO'); document.getElementById('ko-list').innerHTML=koItems.length?'<div style="margin-bottom:.4rem;font-size:12px;font-weight:600;color:var(--danger)">Incidencias:</div>'+koItems.map(p=>`<div class="ko-item"><strong>Punto ${puntosActivos.indexOf(p)+1}:</strong> ${p.funcion}<br><span style="opacity:.75">${results[p.id]?.obs||'Sin observaciones'}</span></div>`).join(''):'<p style="font-size:12px;color:var(--accent);padding:6px 0">✓ Sin incidencias detectadas</p>'; persistDraft(); }
+function backToAudit(){ document.getElementById('summary-panel').classList.add('hidden'); document.getElementById('audit-panel').classList.remove('hidden'); if(viewAll)showAll(); else renderCurrent(); }
+
+async function uploadEvidence(file, pointId, type){
+  const client=supabaseClient || initSupabaseClient();
+  if(!client) throw new Error('Supabase no está configurado.');
+  const cfg=getSupabaseSettings();
+  const ext=(file.name.split('.').pop()||'bin').toLowerCase();
+  const folder=`${auditInfo.fecha}/${safeLinea()}/punto_${pointId}/${type}`;
+  const filePath=`${folder}/${Date.now()}_${uid()}.${ext}`;
+  const { error } = await client.storage.from(cfg.bucket).upload(filePath, file, { upsert:false, contentType:file.type || undefined });
+  if(error) throw error;
+  const { data } = client.storage.from(cfg.bucket).getPublicUrl(filePath);
+  return { storagePath:filePath, url:data.publicUrl };
+}
+
+async function ensureMediaUploaded(){
+  for(const p of puntosActivos){
+    ensureResult(p.id);
+    for(const foto of results[p.id].fotos){
+      if(!foto.uploaded){
+        if(!foto.file) throw new Error(`La foto ${foto.name} ya no está disponible en este navegador. Vuelve a adjuntarla antes de guardar.`);
+        const uploaded=await uploadEvidence(foto.file, p.id, 'fotos');
+        foto.uploaded=true; foto.url=uploaded.url; foto.storagePath=uploaded.storagePath;
       }
-      
-      userAuthenticated = true;
-      document.getElementById('login-status').textContent = 'Usuario autenticado';
-      document.getElementById('login-panel').classList.add('hidden');
-      document.getElementById('supabase-panel').classList.remove('hidden');
     }
-
-    // Check if user is authenticated
-    async function checkAuthentication() {
-      const user = await supabase.auth.getUser();
-      if (!user || !user.data) {
-        alert("No has iniciado sesión. Por favor, inicia sesión para continuar con la auditoría.");
-        window.location.href = '/login';
-        return false;
+    for(const audio of results[p.id].audios){
+      if(!audio.uploaded){
+        if(!audio.file) throw new Error(`El audio ${audio.name} ya no está disponible en este navegador. Vuelve a adjuntarlo antes de guardar.`);
+        const uploaded=await uploadEvidence(audio.file, p.id, 'audios');
+        audio.uploaded=true; audio.url=uploaded.url; audio.storagePath=uploaded.storagePath;
       }
-      return true;
     }
+  }
+}
 
-    async function saveSupabaseSettings() {
-      const cfg = getSupabaseSettings();
-      if (!cfg.url || !cfg.anonKey) {
-        setStatus('cloud-status', 'Falta la URL o la anon key de Supabase.', 'err');
-        return;
-      }
-      localStorage.setItem('supabase-config', JSON.stringify(cfg));
-      initSupabaseClient();
-    }
+function buildAuditPayload(){
+  const week=getISOWeek(auditInfo.fecha);
+  const year=new Date(auditInfo.fecha).getFullYear();
+  const detalle=puntosActivos.map((p,idx)=>{
+    const r=results[p.id]||{};
+    return {
+      punto_id:p.id,
+      numero:idx+1,
+      bloque:p.bloque,
+      funcion:p.funcion,
+      compromiso:p.compromiso,
+      como:p.como,
+      frecuencia:p.frecuencia,
+      duracion:p.duracion,
+      estado:r.estado||'',
+      observaciones:r.obs||'',
+      fotos:(r.fotos||[]).map(f=>({name:f.name,url:f.url,storage_path:f.storagePath})),
+      audios:(r.audios||[]).map(a=>({name:a.name,url:a.url,storage_path:a.storagePath}))
+    };
+  });
+  return {
+    fecha:auditInfo.fecha,
+    linea:auditInfo.linea,
+    auditor:auditInfo.auditor,
+    semana_mes:semanaActual,
+    semana_iso:week,
+    anio:year,
+    resumen:{
+      ok:detalle.filter(x=>x.estado==='OK').length,
+      ko:detalle.filter(x=>x.estado==='KO').length,
+      na:detalle.filter(x=>x.estado==='N/A').length,
+      total:detalle.length
+    },
+    detalle,
+    created_at:new Date().toISOString()
+  };
+}
 
-    function getSupabaseSettings() {
-      return {
-        url: document.getElementById('supabase-url').value.trim(),
-        anonKey: document.getElementById('supabase-anon-key').value.trim(),
-        bucket: document.getElementById('supabase-bucket').value.trim(),
-        table: document.getElementById('supabase-table').value.trim(),
-      };
-    }
+async function saveAuditToCloud(){
+  if(saveInProgress)return;
+  const client=supabaseClient || initSupabaseClient();
+  if(!client){ setStatus('save-status','Configura primero Supabase para poder guardar.','err'); return; }
+  if(!auditInfo.fecha){ setStatus('save-status','Primero inicia la auditoría para generar los datos básicos.','err'); return; }
+  try{
+    saveInProgress=true;
+    setStatus('save-status','Subiendo fotos y audios a Supabase...');
+    await ensureMediaUploaded();
+    const payload=buildAuditPayload();
+    setStatus('save-status','Insertando auditoría en la tabla...');
+    const cfg=getSupabaseSettings();
+    const { error } = await client.from(cfg.table).insert(payload);
+    if(error) throw error;
+    persistDraft();
+    setStatus('save-status','Auditoría guardada correctamente en Supabase.','ok');
+  }catch(err){
+    console.error(err);
+    setStatus('save-status','No se pudo guardar la auditoría: '+err.message,'err');
+  }finally{ saveInProgress=false; }
+}
 
-    function initSupabaseClient() {
-      const cfg = getSupabaseSettings();
-      if (!cfg.url || !cfg.anonKey) {
-        supabaseClient = null;
-        setStatus('cloud-status', 'Sin conectar. Guarda la URL y la anon key para poder subir fotos, audios y la auditoría.');
-        return;
-      }
+function exportExcel(){
+  const week=getISOWeek(auditInfo.fecha);
+  const year=new Date(auditInfo.fecha).getFullYear();
+  const completed=puntosActivos.filter(p=>['OK','KO','N/A'].includes(results[p.id]?.estado));
+  if(!completed.length){alert('No hay puntos completados todavía.');return;}
+  const rows=completed.map((p,i)=>{
+    const r=results[p.id]||{};
+    return {
+      'Fecha':auditInfo.fecha,
+      'Línea':auditInfo.linea,
+      'Auditor':auditInfo.auditor,
+      'Semana año':`Semana ${week}/${year}`,
+      'Nº':i+1,
+      'Bloque':p.bloque,
+      'Función':p.funcion,
+      'Compromiso':p.compromiso,
+      'Cómo verificar':p.como,
+      'Frecuencia':p.frecuencia,
+      'Resultado':r.estado||'',
+      'Observaciones':r.obs||'',
+      'Fotos adjuntas':r.fotos?.length?r.fotos.map(f=>f.url||f.name).join(', '):'',
+      'Audios adjuntos':r.audios?.length?r.audios.map(a=>a.url||a.name).join(', '):'',
+      'Plan de acción':''
+    };
+  });
+  const ws=XLSX.utils.json_to_sheet(rows);
+  ws['!cols']=[12,12,16,14,4,16,22,40,50,12,12,40,30,30,40].map(w=>({wch:w}));
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Auditoría');
+  XLSX.writeFile(wb,`Auditoria_${(auditInfo.linea||'linea').replace(/\s/g,'')}_Sem${week}_${auditInfo.fecha}.xlsx`);
+}
 
-      supabaseClient = supabase.createClient(cfg.url, cfg.anonKey);
-      setStatus('cloud-status', `Configuración guardada. Bucket: ${cfg.bucket} · Tabla: ${cfg.table}`, 'ok');
-    }
-
-    function setStatus(elId, msg, type = '') {
-      const el = document.getElementById(elId);
-      if (!el) return;
-      el.className = 'status-box' + (type ? ` ${type}` : '');
-      el.textContent = msg;
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-      loadSupabaseSettings();
-      initSupabaseClient();
-    });
-  </script>
+function nuevaAuditoria(){
+  if(!confirm('¿Seguro que quieres iniciar una nueva auditoría? Se borrará el borrador actual guardado en este navegador.')) return;
+  localStorage.removeItem(DRAFT_KEY);
+  results={};
+  currentIdx=0;
+  viewAll=false;
+  auditInfo={};
+  puntosActivos=[];
+  // Reset form fields
+  document.getElementById('inp-fecha').value=new Date().toISOString().split('T')[0];
+  document.getElementById('inp-linea').value='';
+  document.getElementById('inp-auditor').value='';
+  document.getElementById('inp-semana').value='1';
+  // Show setup panel, hide others
+  document.getElementById('summary-panel').classList.add('hidden');
+  document.getElementById('audit-panel').classList.add('hidden');
+  document.getElementById('setup-panel').classList.remove('hidden');
+  setStatus('save-status','Todavía no se ha guardado ninguna auditoría en Supabase.');
+}
+</script>
 </body>
 </html>
