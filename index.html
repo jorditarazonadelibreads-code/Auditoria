@@ -603,7 +603,7 @@ async function uploadEvidence(file, pointId, type){
   const cfg=getSupabaseSettings();
   const ext=(file.name.split('.').pop()||'bin').toLowerCase();
   const folder=`${auditInfo.fecha}/${safeLinea()}/punto_${pointId}/${type}`;
-  const filePath=`${folder}/${Date.now()}_${uid()}.${ext}`;
+  const filePath=`${folder}/${file.name}`;
   const { error } = await client.storage.from(cfg.bucket).upload(filePath, file, { upsert:false, contentType:file.type || undefined });
   if(error) throw error;
   const { data } = client.storage.from(cfg.bucket).getPublicUrl(filePath);
