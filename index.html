@@ -240,6 +240,7 @@
         <div class="btn-stack">
           <button class="btn btn-blue" onclick="saveAuditToCloud()">☁️ Guardar auditoría en nube</button>
           <button class="btn btn-excel" onclick="exportExcel()">⬇ Descargar Excel (.xlsx)</button>
+          <button class="btn" style="background:#6f42c1;color:#fff;" onclick="exportExcelClaude()">🤖 Exportar para Claude (URLs 24h)</button>
           <button class="btn btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
         </div>
         <div class="status-box" id="save-status">Todavía no se ha guardado ninguna auditoría en Supabase.</div>
@@ -743,6 +744,76 @@ function nuevaAuditoria(){
   document.getElementById('setup-panel').classList.remove('hidden');
   setStatus('save-status','Todavía no se ha guardado ninguna auditoría en Supabase.');
 }
+
+async function exportExcelClaude(){
+  const client = supabaseClient || initSupabaseClient();
+  if(!client){ alert('Configura primero Supabase.'); return; }
+  const cfg = getSupabaseSettings();
+  const week = getISOWeek(auditInfo.fecha);
+  const year = new Date(auditInfo.fecha).getFullYear();
+  const completed = puntosActivos.filter(p=>['OK','KO','N/A'].includes(results[p.id]?.estado));
+  if(!completed.length){ alert('No hay puntos completados todavía.'); return; }
+
+  setStatus('save-status','Generando URLs firmadas (24h)... por favor espera.');
+
+  try{
+    const rows = [];
+    for(let i=0; i<completed.length; i++){
+      const p = completed[i];
+      const r = results[p.id] || {};
+
+      // Generate signed URLs for fotos
+      const fotosURLs = [];
+      for(const foto of (r.fotos||[])){
+        if(foto.storagePath){
+          const { data, error } = await client.storage.from(cfg.bucket).createSignedUrl(foto.storagePath, 86400);
+          fotosURLs.push(error ? foto.storagePath : `${foto.name}: ${data.signedUrl}`);
+        }
+      }
+
+      // Generate signed URLs for audios
+      const audiosURLs = [];
+      for(const audio of (r.audios||[])){
+        if(audio.storagePath){
+          const { data, error } = await client.storage.from(cfg.bucket).createSignedUrl(audio.storagePath, 86400);
+          audiosURLs.push(error ? audio.storagePath : `${audio.name}: ${data.signedUrl}`);
+        }
+      }
+
+      rows.push({
+        'Fecha': auditInfo.fecha,
+        'Línea': auditInfo.linea,
+        'Auditor': auditInfo.auditor,
+        'Semana año': `Semana ${week}/${year}`,
+        'Nº': i+1,
+        'Bloque': p.bloque,
+        'Función': p.funcion,
+        'Compromiso': p.compromiso,
+        'Cómo verificar': p.como,
+        'Frecuencia': p.frecuencia,
+        'Resultado': r.estado||'',
+        'Observaciones': r.obs||'',
+        'Fotos (URLs 24h)': fotosURLs.join('
+'),
+        'Audios (URLs 24h — transcribir)': audiosURLs.join('
+'),
+        'Plan de acción': ''
+      });
+    }
+
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws['!cols'] = [12,12,16,14,4,16,22,40,50,12,12,40,50,50,40].map(w=>({wch:w}));
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Auditoría');
+    XLSX.writeFile(wb, `Auditoria_Claude_${(auditInfo.linea||'linea').replace(/\s/g,'')}_Sem${week}_${auditInfo.fecha}.xlsx`);
+    setStatus('save-status', 'Excel para Claude generado correctamente. Las URLs caducan en 24h.', 'ok');
+
+  }catch(err){
+    console.error(err);
+    setStatus('save-status', 'Error generando URLs firmadas: ' + err.message, 'err');
+  }
+}
+
 </script>
 </body>
 </html>
