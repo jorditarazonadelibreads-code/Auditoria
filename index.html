@@ -793,10 +793,8 @@ async function exportExcelClaude(){
         'Frecuencia': p.frecuencia,
         'Resultado': r.estado||'',
         'Observaciones': r.obs||'',
-        'Fotos (URLs 24h)': fotosURLs.join('
-'),
-        'Audios (URLs 24h — transcribir)': audiosURLs.join('
-'),
+        'Fotos (URLs 24h)': fotosURLs.join(' | '),
+        'Audios (URLs 24h — transcribir)': audiosURLs.join(' | '),
         'Plan de acción': ''
       });
     }
